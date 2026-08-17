@@ -1,123 +1,152 @@
-<?xml version='1.0' encoding='utf-8'?>
-<mxfile host="app.diagrams.net" version="24.7.17">
-  <diagram id="logical-topology-v10" name="Logical Topology v1.0">
-    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+<mxfile host="app.diagrams.net">
+  <diagram id="logical-topology-v2" name="Logical Architecture">
+    <mxGraphModel dx="763" dy="461" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1750" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="zone_core" value="CORE / L3 DISTRIBUTION" style="swimlane;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#999999;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="50" y="60" width="500" height="310" />
+        <mxCell id="zone_edge" parent="1" style="swimlane;html=1;rounded=1;fillColor=#F8F9FA;strokeColor=#D0D5DD;fontStyle=1;startSize=28;fontSize=12;fontColor=#344054;swimlaneFillColor=#FFFFFF;collapsible=0;align=center;" value="TIER 1 — SECURITY / WAN EDGE" vertex="1">
+          <mxGeometry height="170" width="1180" x="40" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="zone_access" value="ACCESS LAYER (FLOORS 1-3)" style="swimlane;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#999999;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="590" y="60" width="680" height="500" />
+        <mxCell id="isp" parent="zone_edge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE4E2;strokeColor=#F04438;fontStyle=1;fontSize=12;fontColor=#912018;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;ISP / Public Gateway&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;203.0.113.1/30&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="220" x="50" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="zone_edge" value="SECURITY / WAN EDGE" style="swimlane;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#999999;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="50" y="420" width="500" height="250" />
+        <mxCell id="rtr" parent="zone_edge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE4E2;strokeColor=#F04438;fontStyle=1;fontSize=12;fontColor=#912018;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;RTR-EDGE-01&lt;/b&gt; (ISR 4331)&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;WAN: 203.0.113.2/30&lt;br&gt;Transit: 192.168.100.1/30&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="280" x="440" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="zone_end" value="REPRESENTATIVE ENDPOINTS (POST CHANGE-001)" style="swimlane;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#999999;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="590" y="590" width="680" height="250" />
+        <mxCell id="fw" parent="zone_edge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE4E2;strokeColor=#F04438;fontStyle=1;fontSize=12;fontColor=#912018;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;FW-EDGE-01&lt;/b&gt; (ASA 5506-X)&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Outside: 192.168.100.2/30&lt;br&gt;Inside: 10.10.70.2 (VLAN 70)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="280" x="850" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="core1" value="CORE-L3-01&lt;br&gt;&lt;font style='font-size:11px'&gt;Primary L3 Active&lt;br&gt;9 Production SVIs • ip routing&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="90" y="140" width="190" height="105" />
+        <mxCell id="zone_core" parent="1" style="swimlane;html=1;rounded=1;fillColor=#F8F9FA;strokeColor=#D0D5DD;fontStyle=1;startSize=28;fontSize=12;fontColor=#344054;swimlaneFillColor=#FFFFFF;collapsible=0;align=center;" value="TIER 2 — CORE / L3 DISTRIBUTION LAYER" vertex="1">
+          <mxGeometry height="200" width="1180" x="40" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="core2" value="CORE-L3-02&lt;br&gt;&lt;font style='font-size:11px'&gt;Secondary L2 Standby&lt;br&gt;Mgmt VLAN 70 only&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="320" y="140" width="190" height="105" />
+        <mxCell id="core1" parent="zone_core" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4EBFF;strokeColor=#9E77ED;fontStyle=1;fontSize=12;fontColor=#53389E;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;CORE-L3-01&lt;/b&gt; (Primary Active Gateway)&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;• 9 Production SVIs (VLAN 10–90)&lt;br&gt;• STP Primary Root (Priority 4096)&lt;br&gt;• SVI 70 Transit: 10.10.70.10&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="340" x="160" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="f1" value="ACC-F1-01&lt;br&gt;&lt;font style='font-size:11px'&gt;HR / Finance (Floor 1)&lt;br&gt;Po1 • Fa0/23-24&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="640" y="140" width="180" height="95" />
+        <mxCell id="core2" parent="zone_core" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4EBFF;strokeColor=#9E77ED;fontStyle=1;fontSize=12;fontColor=#53389E;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;CORE-L3-02&lt;/b&gt; (Secondary L2 Standby)&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;• Management SVI 70 only&lt;br&gt;• STP Secondary Root (Priority 8192)&lt;br&gt;• Redundant Transit Path&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="340" x="660" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="f2" value="ACC-F2-01&lt;br&gt;&lt;font style='font-size:11px'&gt;Dev / QA (Floor 2)&lt;br&gt;Po2 • Fa0/23-24&lt;br&gt;&lt;b&gt;[CHANGE-001 Anchor]&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="855" y="140" width="180" height="95" />
+        <mxCell id="zone_access" parent="1" style="swimlane;html=1;rounded=1;fillColor=#F8F9FA;strokeColor=#D0D5DD;fontStyle=1;startSize=28;fontSize=12;fontColor=#344054;swimlaneFillColor=#FFFFFF;collapsible=0;align=center;" value="TIER 3 — ACCESS LAYER (DUAL-LINK LACP)" vertex="1">
+          <mxGeometry height="180" width="1180" x="40" y="530" as="geometry" />
         </mxCell>
-        <mxCell id="f3" value="ACC-F3-01&lt;br&gt;&lt;font style='font-size:11px'&gt;Exec / Server (Floor 3)&lt;br&gt;Po3 • Fa0/23-24&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="1070" y="140" width="180" height="95" />
+        <mxCell id="acc_f1" parent="zone_access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FADF;strokeColor=#12B76A;fontStyle=1;fontSize=12;fontColor=#027A48;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;ACC-F1-01&lt;/b&gt; (Floor 1)&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;HR &amp; Finance&lt;br&gt;Fa0/23-24 (Po1)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="280" x="60" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="fw" value="FW-EDGE-01&lt;br&gt;&lt;font style='font-size:11px'&gt;ASA 5506-X&lt;br&gt;Inside 10.10.70.2&lt;br&gt;Outside 192.168.100.2&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="100" y="500" width="190" height="105" />
+        <mxCell id="acc_f2" parent="zone_access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FADF;strokeColor=#12B76A;fontStyle=1;fontSize=12;fontColor=#027A48;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;ACC-F2-01&lt;/b&gt; (Floor 2)&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Dev / QA&lt;br&gt;Fa0/23-24 (Po2)&lt;br&gt;&lt;b&gt;[CHANGE-001 Anchor]&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="280" x="450" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="rtr" value="RTR-EDGE-01&lt;br&gt;&lt;font style='font-size:11px'&gt;WAN Router&lt;br&gt;203.0.113.2/30&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="340" y="500" width="175" height="105" />
+        <mxCell id="acc_f3" parent="zone_access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FADF;strokeColor=#12B76A;fontStyle=1;fontSize=12;fontColor=#027A48;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;ACC-F3-01&lt;/b&gt; (Floor 3)&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;Exec / Server&lt;br&gt;Fa0/23-24 (Po3)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="280" x="840" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="isp" value="ISP / Public Gateway&lt;br&gt;&lt;font style='font-size:11px'&gt;203.0.113.1/30&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="590" y="480" width="180" height="80" />
+        <mxCell id="zone_end" parent="1" style="swimlane;html=1;rounded=1;fillColor=#F8F9FA;strokeColor=#D0D5DD;fontStyle=1;startSize=28;fontSize=12;fontColor=#344054;swimlaneFillColor=#FFFFFF;collapsible=0;align=center;" value="TIER 4 — REPRESENTATIVE ENDPOINTS (POST CHANGE-001)" vertex="1">
+          <mxGeometry height="340" width="1180" x="40" y="770" as="geometry" />
         </mxCell>
-        <mxCell id="dev" value="DEV-PC-01&lt;br&gt;VLAN 10 • Fa0/1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="630" y="650" width="120" height="65" />
+        <mxCell id="ep_hr" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF0C7;strokeColor=#F79009;fontSize=11;fontColor=#7A2E0E;strokeWidth=1;align=center;verticalAlign=middle;" value="&lt;b&gt;HR Workstation&lt;/b&gt;&lt;br&gt;VLAN 30 • Fa0/1" vertex="1">
+          <mxGeometry height="55" width="140" x="50" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="qa" value="QA Workstation&lt;br&gt;VLAN 20 • Fa0/10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="770" y="650" width="120" height="65" />
+        <mxCell id="ep_fin" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF0C7;strokeColor=#F79009;fontSize=11;fontColor=#7A2E0E;strokeWidth=1;align=center;verticalAlign=middle;" value="&lt;b&gt;Finance PC&lt;/b&gt;&lt;br&gt;VLAN 40 • Fa0/10" vertex="1">
+          <mxGeometry height="55" width="140" x="210" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="hr" value="HR Workstation&lt;br&gt;VLAN 30 • Fa0/1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="910" y="650" width="120" height="65" />
+        <mxCell id="ep_cctv" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF0C7;strokeColor=#F79009;fontSize=11;fontColor=#7A2E0E;strokeWidth=1;align=center;verticalAlign=middle;" value="&lt;b&gt;CCTV Camera&lt;/b&gt;&lt;br&gt;VLAN 80 • Fa0/19" vertex="1">
+          <mxGeometry height="55" width="140" x="130" y="160" as="geometry" />
         </mxCell>
-        <mxCell id="fin" value="Finance PC&lt;br&gt;VLAN 40 • Fa0/10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="1050" y="650" width="120" height="65" />
+        <mxCell id="ep_dev" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontStyle=1;fontSize=11;fontColor=#9A3412;strokeWidth=1.5;align=center;verticalAlign=middle;" value="&lt;b&gt;DEV-PC-01&lt;/b&gt;&lt;br&gt;VLAN 10 • Fa0/1&lt;br&gt;&lt;font color=&#39;#C2410C&#39;&gt;&lt;b&gt;[CHANGE-001]&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="65" width="150" x="430" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="exec" value="Executive PC&lt;br&gt;VLAN 50 • Fa0/1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="630" y="745" width="120" height="65" />
+        <mxCell id="ep_qa" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF0C7;strokeColor=#F79009;fontSize=11;fontColor=#7A2E0E;strokeWidth=1;align=center;verticalAlign=middle;" value="&lt;b&gt;QA Workstation&lt;/b&gt;&lt;br&gt;VLAN 20 • Fa0/10" vertex="1">
+          <mxGeometry height="65" width="150" x="600" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="srv" value="Git Server&lt;br&gt;VLAN 60 • Fa0/10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="770" y="745" width="120" height="65" />
+        <mxCell id="ep_exec" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF0C7;strokeColor=#F79009;fontSize=11;fontColor=#7A2E0E;strokeWidth=1;align=center;verticalAlign=middle;" value="&lt;b&gt;Executive PC&lt;/b&gt;&lt;br&gt;VLAN 50 • Fa0/1" vertex="1">
+          <mxGeometry height="55" width="140" x="830" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="guest" value="Guest PC&lt;br&gt;VLAN 90 • Fa0/15" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="910" y="745" width="120" height="65" />
+        <mxCell id="ep_git" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF0C7;strokeColor=#F79009;fontSize=11;fontColor=#7A2E0E;strokeWidth=1;align=center;verticalAlign=middle;" value="&lt;b&gt;Git Server (.21)&lt;/b&gt;&lt;br&gt;VLAN 60 • Fa0/10" vertex="1">
+          <mxGeometry height="55" width="140" x="990" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="cctv" value="CCTV Reps&lt;br&gt;VLAN 80 • Fa0/19-20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="1050" y="745" width="120" height="65" />
+        <mxCell id="ep_guest" parent="zone_end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF0C7;strokeColor=#F79009;fontSize=11;fontColor=#7A2E0E;strokeWidth=1;align=center;verticalAlign=middle;" value="&lt;b&gt;Guest Laptop&lt;/b&gt;&lt;br&gt;VLAN 90 • Fa0/15" vertex="1">
+          <mxGeometry height="55" width="140" x="910" y="160" as="geometry" />
         </mxCell>
-        <mxCell id="e1" value="Po1 • LACP • Gi1/0/1-2 ↔ Fa0/23-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="core1" target="f1">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="sb_change" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFFAEB;strokeColor=#FEDF89;fontSize=11;fontColor=#475467;align=left;spacingLeft=10;spacingTop=8;spacingRight=10;size=16;" value="&lt;b&gt;CHANGE AUDIT: CHANGE-001&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Problem:&lt;/b&gt; DEV-PC-01 erroneously cabled to Floor 1 Switch.&lt;br&gt;• &lt;b&gt;Action:&lt;/b&gt; Relocated patch lead to &lt;code&gt;ACC-F2-01:Fa0/1&lt;/code&gt;.&lt;br&gt;• &lt;b&gt;Security:&lt;/b&gt; Cleared stale MAC on F1; Enabled Port-Security on F2.&lt;br&gt;• &lt;b&gt;Validation:&lt;/b&gt; 100% ICMP reachability to Core Gateway (10.10.10.1) &amp; Git Server (10.10.60.21)." vertex="1">
+          <mxGeometry height="210" width="430" x="1260" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="Po2 • LACP • Gi1/0/3-4 ↔ Fa0/23-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="core1" target="f2">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="sb_specs" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFFAEB;strokeColor=#FEDF89;fontSize=11;fontColor=#475467;align=left;spacingLeft=10;spacingTop=8;spacingRight=10;size=16;" value="&lt;b&gt;INFRASTRUCTURE DESIGN SPECS&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;L2 Bundling:&lt;/b&gt; LACP (802.3ad) Active-Active Po1..3&lt;br&gt;• &lt;b&gt;STP Protocol:&lt;/b&gt; Rapid-PVST+ (Sub-2s Failover)&lt;br&gt;• &lt;b&gt;L3 Forwarding:&lt;/b&gt; Centralized SVI on Core 1&lt;br&gt;• &lt;b&gt;Perimeter:&lt;/b&gt; Cisco ASA 5506-X Stateful NAT&lt;br&gt;• &lt;b&gt;Trunk Allowed:&lt;/b&gt; VLAN 10–90, Native VLAN 999" vertex="1">
+          <mxGeometry height="190" width="430" x="1260" y="280" as="geometry" />
         </mxCell>
-        <mxCell id="e3" value="Po3 • LACP • Gi1/0/5-6 ↔ Fa0/23-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="core1" target="f3">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="sb_ports" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFFAEB;strokeColor=#FEDF89;fontSize=11;fontColor=#475467;align=left;spacingLeft=10;spacingTop=8;spacingRight=10;size=16;" value="&lt;b&gt;STANDARDIZED ACCESS PORT MAP&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Fa0/1 – Fa0/8:&lt;/b&gt; Primary Workstations (PortFast, BPDU Guard)&lt;br&gt;• &lt;b&gt;Fa0/9 – Fa0/18:&lt;/b&gt; Secondary Clients / Local Services&lt;br&gt;• &lt;b&gt;Fa0/19 – Fa0/20:&lt;/b&gt; Surveillance CCTV (VLAN 80)&lt;br&gt;• &lt;b&gt;Fa0/21 – Fa0/22:&lt;/b&gt; Access Points &amp; VoIP Phones&lt;br&gt;• &lt;b&gt;Fa0/23 – Fa0/24:&lt;/b&gt; LACP Uplinks to Core Layer" vertex="1">
+          <mxGeometry height="190" width="430" x="1260" y="500" as="geometry" />
         </mxCell>
-        <mxCell id="e4" value="2× Redundant Trunk • Gi1/0/23-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="core1" target="core2">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_isp_rtr" edge="1" parent="1" source="isp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#D92D20;strokeWidth=2;labelBackgroundColor=#FFFFFF;align=center;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" target="rtr" value="Public WAN">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e5" value="VLAN 70 Transit • 10.10.70.10 ↔ 10.10.70.2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="core1" target="fw">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_rtr_fw" edge="1" parent="1" source="rtr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#D92D20;strokeWidth=2;labelBackgroundColor=#FFFFFF;align=center;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" target="fw" value="Outside Transit">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e6" value="Outside Transit • 192.168.100.2 ↔ .1/30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fw" target="rtr">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_intercore" edge="1" parent="1" source="core1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#7F56D9;strokeWidth=2.5;labelBackgroundColor=#FFFFFF;align=center;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" target="core2" value="2x Redundant Trunk">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e7" value="Public WAN • 203.0.113.2 ↔ .1/30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="rtr" target="isp">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_fw_core" edge="1" parent="1" source="fw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#D92D20;strokeWidth=2;labelBackgroundColor=#FFFFFF;align=center;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="core1" value="Transit VLAN 70">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1030" y="240" />
+              <mxPoint x="370" y="240" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="e20" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f2" target="dev">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_po1" edge="1" parent="1" source="core1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#099250;strokeWidth=2;labelBackgroundColor=#FFFFFF;align=center;exitX=0.2;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="acc_f1" value="Po1 • LACP">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="268" y="485" />
+              <mxPoint x="240" y="485" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="e21" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f2" target="qa">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_po2" edge="1" parent="1" source="core1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#099250;strokeWidth=2;labelBackgroundColor=#FFFFFF;align=center;exitX=0.8;exitY=1.0;exitDx=0;exitDy=0;entryX=0.25;entryY=0.0;entryDx=0;entryDy=0;" target="acc_f2" value="Po2 • LACP">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410.04" y="430.04" />
+              <mxPoint x="410.04" y="505" />
+              <mxPoint x="560.04" y="505" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="e22" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f1" target="hr">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_po3" edge="1" parent="1" source="core1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#099250;strokeWidth=2;labelBackgroundColor=#FFFFFF;align=center;exitX=0.95;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="acc_f3" value="Po3 • LACP">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="523" y="505" />
+              <mxPoint x="1020" y="505" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="e23" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f1" target="fin">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_f1_hr" edge="1" parent="1" source="acc_f1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#98A2B3;strokeWidth=1;dashed=1;labelBackgroundColor=#FFFFFF;align=center;exitX=0.25;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_hr" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e24" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f3" target="exec">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_f1_fin" edge="1" parent="1" source="acc_f1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#98A2B3;strokeWidth=1;dashed=1;labelBackgroundColor=#FFFFFF;align=center;exitX=0.75;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_fin" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e25" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f3" target="srv">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_f1_cctv" edge="1" parent="1" source="acc_f1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#98A2B3;strokeWidth=1;dashed=1;labelBackgroundColor=#FFFFFF;align=center;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_cctv" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e26" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f3" target="guest">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_f2_dev" edge="1" parent="1" source="acc_f2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#EA580C;strokeWidth=1.5;labelBackgroundColor=#FFFFFF;align=center;exitX=0.35;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_dev" value="Sticky MAC">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e27" value="Representative endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="f1" target="cctv">
-          <mxGeometry as="geometry" relative="1" />
+        <mxCell id="e_f2_qa" edge="1" parent="1" source="acc_f2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#98A2B3;strokeWidth=1;dashed=1;labelBackgroundColor=#FFFFFF;align=center;exitX=0.65;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_qa" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="note1" value="&lt;b&gt;Implementation Baseline v1.0-Final&lt;/b&gt;&lt;br&gt;• Fully reconciled physical attachments.&lt;br&gt;• Reflected CHANGE-001 (DEV-PC-01 on Floor 2).&lt;br&gt;• 100% Verified in Packet Tracer." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="50" y="690" width="500" height="105" />
+        <mxCell id="e_f3_exec" edge="1" parent="1" source="acc_f3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#98A2B3;strokeWidth=1;dashed=1;labelBackgroundColor=#FFFFFF;align=center;exitX=0.25;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_exec" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="note2" value="&lt;b&gt;Port Reconciliation Map&lt;/b&gt;&lt;br&gt;• Fa0/23-24 = LACP Uplinks (Po1..3)&lt;br&gt;• Fa0/19-20 = CCTV (VLAN 80)&lt;br&gt;• Fa0/21 = AP • Fa0/22 = IP Phone" style="shape=note;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="610" y="350" width="340" height="125" />
+        <mxCell id="e_f3_git" edge="1" parent="1" source="acc_f3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#98A2B3;strokeWidth=1;dashed=1;labelBackgroundColor=#FFFFFF;align=center;exitX=0.75;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_git" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="note3" value="&lt;b&gt;Segmentation Model&lt;/b&gt;&lt;br&gt;• VLAN 10–90: Production user &amp; service subnets.&lt;br&gt;• VLAN 999: Isolated Native VLAN.&lt;br&gt;• No SVI on VLAN 999." style="shape=note;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry as="geometry" x="970" y="350" width="300" height="125" />
+        <mxCell id="e_f3_guest" edge="1" parent="1" source="acc_f3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#98A2B3;strokeWidth=1;dashed=1;labelBackgroundColor=#FFFFFF;align=center;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" target="ep_guest" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mask_tier2_header" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=none;fontStyle=1;fontSize=12;fontColor=#344054;align=center;verticalAlign=middle;" value="TIER 2 — CORE / L3 DISTRIBUTION LAYER" vertex="1">
+          <mxGeometry height="26" width="1176" x="42" y="272" as="geometry" />
+        </mxCell>
+        <mxCell id="mask_tier3_header" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=none;fontStyle=1;fontSize=12;fontColor=#344054;align=center;verticalAlign=middle;" value="TIER 3 — ACCESS LAYER (DUAL-LINK LACP)" vertex="1">
+          <mxGeometry height="26" width="1176" x="42" y="532" as="geometry" />
+        </mxCell>
+        <mxCell id="mask_tier4_header" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=none;fontStyle=1;fontSize=12;fontColor=#344054;align=center;verticalAlign=middle;" value="TIER 4 — REPRESENTATIVE ENDPOINTS (POST CHANGE-001)" vertex="1">
+          <mxGeometry height="26" width="1176" x="42" y="772" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -1,0 +1,5 @@
+Vendor_Name,Product_Series,Layer_Position,LACP_Support,RSTP_Support,L3_Routing_Support,SVI_ACL_Capability,Relative_Cost,Selected_Role
+Cisco,Catalyst 3650 / 2960X,Core / Access,802.3ad (Active),Rapid PVST+ (802.1w),Static / OSPF / SVI,Extended ACLs,Baseline Reference,Primary Lab Standard (Simulator Baseline)
+Aruba (HPE),Aruba CX 6200 / 6300,Core / Access,LACP Active,MSTP / RPVST+,Layer 3 SVI,Ingress/Egress ACLs,Equally Competitive,Vendor Comparison Reference
+Fortinet,FortiSwitch 148F / 248F,Access / Edge,LACP Active,RSTP,Static SVI,FortiGate Integrated,Medium,Security Boundary Reference
+Huawei,CloudEngine S5735 / S6730,Core / Access,Eth-Trunk LACP,VBST / RSTP,Layer 3 SVI,Traffic Filter ACLs,Lower Cost,Alternative Reference
