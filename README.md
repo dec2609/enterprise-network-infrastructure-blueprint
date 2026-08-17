@@ -44,12 +44,12 @@ During post-implementation verification, an endpoint allocation discrepancy was 
 
 ## 🏗️ Architecture Views
 
-The network architecture is captured across 5 distinct engineering perspectives, preserved in native vector format (`.drawio.svg`) for maximum clarity and traceability:
+The network architecture is captured across 5 distinct engineering perspectives, preserved in native vector format (`.svg` / `.drawio`) for maximum clarity and traceability:
 
 ### 1. Logical Architecture *(Hero View)*
 The primary 4-tier hierarchical topology illustrating core routing, distribution, edge security, and access layer segmentation.
 
-![Logical Architecture](./architecture/logical/logical_topology.drawio.svg)
+![Logical Architecture](./architecture/logical/logical_topology.svg)
 
 ---
 
@@ -61,28 +61,28 @@ The primary 4-tier hierarchical topology illustrating core routing, distribution
 #### 2.1 Physical Rack Layout & Cabling
 Physical equipment allocation, cable labeling, and power redundancy across the 42U Server Room rack.
 
-![Physical Architecture](./architecture/physical/physical_rack_layout.drawio.svg)
+![Physical Architecture](./architecture/physical/physical_rack_layout.svg)
 
 ---
 
 #### 2.2 Layer 3 Routing & Traffic Flows
 Inter-VLAN packet flow paths between user workstations, centralized infrastructure services (Git Server `10.10.60.21`), and NAT Overload egress to ISP.
 
-![L3 Routing Flow](./architecture/routing/l3_routing_flow.drawio.svg)
+![L3 Routing Flow](./architecture/routing/l3_routing_flow.svg)
 
 ---
 
 #### 2.3 Security Boundaries & Policy Enforcement Points
 Trust Zone classification (Trust Levels 1–5) and ingress SVI Extended ACL policy filter boundaries.
 
-![Security Boundary](./architecture/security/acl_security_boundary.drawio.svg)
+![Security Boundary](./architecture/security/acl_security_boundary.svg)
 
 ---
 
 #### 2.4 High Availability & Link Failover
 LACP bundle member link degradation and Spanning-Tree Alternate Blocking-to-Forwarding (`Altn BLK` -> `Root FWD`) failover behavior.
 
-![High Availability](./architecture/high_availability/lacp_etherchannel_topology.drawio.svg)
+![High Availability](./architecture/high_availability/lacp_etherchannel_topology.svg)
 
 </details>
 
