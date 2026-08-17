@@ -1,56 +1,61 @@
 # Design Decisions & Technical Scope Definition
 
 ## 1. Context & Case Study Assumptions
-Bài toán thiết kế hạ tầng được xây dựng dựa trên bối cảnh giả lập cho một doanh nghiệp vừa tại Việt Nam (**ABC Digital Solutions**):
-* **Quy mô:** 150 nhân viên, làm việc tại văn phòng 3 tầng, áp dụng mô hình Hybrid Working.
-* **Architectural Assumption:** Hiện tại, ABC Digital Solutions đang sử dụng mô hình mạng phẳng (Flat Layer-2 Network), toàn bộ thiết bị và phòng ban nằm chung một broadcast domain, gây ra rủi ro cao về nghẽn mạng và đứt gãy bảo mật.
 
-Nhiệm vụ của dự án là tái thiết kế hạ tầng mạng nội bộ (Enterprise Network) an toàn, hiệu năng cao, phân vùng rõ ràng và dễ dàng mở rộng.
+The infrastructure design is engineered around a realistic deployment scenario for a mid-sized Vietnamese enterprise (**ABC Digital Solutions**):
+* **Scale & Organization:** 150 employees distributed across a 3-floor office facility operating under a hybrid working model.
+* **Architectural Baseline:** ABC Digital Solutions previously operated on an unsegmented Flat Layer-2 Network where all endpoints and departments shared a single broadcast domain, introducing severe broadcast congestion and substantial security risks.
+
+The primary project objective is to redesign, implement, validate, and document a multi-tier, secure, high-performance, and auditable enterprise campus infrastructure with structured change governance.
 
 ---
 
-## 2. Evidence-Based Requirements & Interpretation
+## 2. Evidence-Based Requirements & Engineering Interpretation
 
-Phạm vi kỹ thuật của dự án được quyết định thông qua quy trình: **Collect Evidence -> Interpret Requirements -> Engineering Decision**.
-
-* **Explicit Dataset Evidence:** Khảo sát ngẫu nhiên từ *Vietnam Job Market Dataset* (157 job postings vị trí IT Support/Helpdesk/Junior Network, chi tiết tại `research/data/raw_jobs.csv`) chỉ ra tần suất xuất hiện trực tiếp của các công nghệ: Active Directory (9 JDs), Routing (7 JDs), DNS (7 JDs), DHCP (6 JDs), VPN (5 JDs), Firewall (3 JDs) và VLAN (2 JDs) tại các doanh nghiệp như Axon, CyberLogitec, TechValley, Reeracoen, Manpower... (Tham chiếu báo cáo: `docs/Requirements_Discovery.md`).
-* **Implicit Review & Qualitative Analysis:** Một đánh giá định tính trên tập mẫu (Qualitative Review) chỉ ra rằng nhiều mô tả công việc không ghi trực tiếp từ khóa "VLAN" mà sử dụng các thuật ngữ vận hành cấp cao hơn như "Quản trị hệ thống LAN/WAN" hoặc "Cấu hình Cisco Switches". Điều này gợi ý rằng vị trí công việc đòi hỏi kỹ năng quản trị Switch Layer-2, trong đó VLAN là một công nghệ ứng dụng phổ biến (Commonly Implemented).
-* **Engineering Interpretation:** Dữ liệu cho thấy các vị trí tuyển dụng khởi điểm (Entry-level) luôn yêu cầu ứng viên làm chủ vững vàng kỹ năng vận hành Hạ tầng Mạng lõi (Network Fundamentals) trước khi bước sang Quản trị Định danh (Identity Management) hay Giám sát Nâng cao (Monitoring/SIEM).
+The technical boundaries of the architecture were established through a structured Systems Engineering lifecycle: **Evidence Collection $\rightarrow$ Requirement Synthesis $\rightarrow$ Architectural Decision**.
+* **Explicit Market Evidence:** Quantitative analysis of 157 Vietnamese IT job postings (IT Support, Helpdesk, Junior Network Engineer; raw dataset archived at `research/raw/raw_jobs.csv`) revealed core demand for Active Directory (9 JDs), Routing (7 JDs), DNS (7 JDs), DHCP (6 JDs), VPN (5 JDs), Firewalls (3 JDs), and VLAN Segmentation (2 JDs) across enterprises such as Axon, CyberLogitec, TechValley, Reeracoen, and Manpower (reference report: `docs/01_requirements_discovery/requirements_discovery.md`).
+* **Implicit Review & Qualitative Synthesis:** Qualitative review revealed that many technical job specifications omit explicit keywords like "VLAN" and instead rely on higher-level operational competencies such as "LAN/WAN Administration" or "Cisco Switch Configuration". This demonstrates that Layer-2 managed switching competencies and VLAN segmentation are core underlying industry expectations.
+* **Cisco Validated Design (CVD) Reconciliation:** Market requirements were cross-referenced against official Cisco Validated Designs (`research/raw/cisco_cvd_raw_text.csv`) to translate basic JD requirements into enterprise-grade architectural standards (e.g., Collapsed Core L3 switching, Rapid-PVST+, and dual-link LACP active aggregation).
 
 ---
 
 ## 3. Scope Definition for Version 1.0 (In-Scope)
-Dựa trên phần diễn giải (Interpretation) ở trên, Version 1.0 tập trung xây dựng hoàn chỉnh và vững chắc **Hạ tầng Mạng lõi (Core Enterprise Network Infrastructure)**:
 
-* **Network Segmentation (VLANs):** Tách biệt các dải mạng phòng ban (HR, Kế toán, Developers, Sales/Ops, Management, Guest, Native). *Lý do:* Giảm Broadcast Storm, bảo vệ dữ liệu nhạy cảm Kế toán/HR.
-* **Automatic IP Allocation (VLSM & DHCP):** Quy hoạch IP Private chuẩn hóa bằng kỹ thuật VLSM và cấu hình DHCP Server tự động cấp IP theo VLAN. *Lý do:* Tránh xung đột IP tĩnh, tối ưu vận hành Helpdesk.
-* **Inter-VLAN Routing:** Triển khai định tuyến Inter-VLAN qua Router/Layer 3 Switch (mô hình Router-on-a-Stick). *Lý do:* Cho phép lưu lượng hợp pháp luân chuyển giữa các tầng dưới sự kiểm soát.
-* **Access Control & Guest Isolation (ACL):** Viết Access Control List cách ly hoàn toàn mạng Wi-Fi Guest ra Internet và chặn phòng Dev truy cập chéo vào Subnet Kế toán/HR. *Lý do:* Ngăn ngừa nguy cơ lây nhiễm mã độc (Ransomware).
-* **Layer 2 Security Baseline:** Cấu hình Spanning Tree Protocol (STP) và Port Security cơ bản trên Access Switches. *Lý do:* Chống loop mạng và ngăn cắm thiết bị lạ (Rogue Switches).
+Version 1.0 focuses on building a resilient, fully verified **Enterprise Core Network & Edge Security Baseline**:
+* **Hierarchical Switching & Centralized L3 Routing:** Deployment of dual Cisco Catalyst 3650 Core Switches (`CORE-L3-01` active gateway, `CORE-L3-02` standby L2) utilizing centralized Switched Virtual Interfaces (SVIs) for 9 production subnets (VLAN 10–90) and floating default routing (`0.0.0.0/0 via 10.10.70.2`) to eliminate Router-on-a-Stick bandwidth bottlenecks.
+* **Layer-2 High Availability & Redundancy:** Implementation of dual-link IEEE 802.3ad LACP EtherChannels (`Port-channel1..3`) between Core and Access switches, Spanning-Tree tuning via Rapid-PVST+ with deterministic root bridge priority, and an isolated Native VLAN 999 with zero SVI binding.
+* **Edge Hardening & Port Security:** Mandatory enforcement of `spanning-tree portfast`, `bpduguard enable`, DHCP Snooping, and Sticky Port-Security (`maximum 1`, violation restrict) across host-facing access ports.
+* **Granular Security Controls & Lateral Isolation:** Deployment of ingress SVI Extended ACLs (`ACL_DEV_IN`, `ACL_FIN_IN`, `ACL_GUEST_IN`) to isolate guest wireless traffic and enforce strict role-based access to shared server infrastructure (Git Server `10.10.60.21` and Database `10.10.60.22`).
+* **Perimeter Security & WAN Egress:** Integration of a Cisco ASA 5506-X Firewall (`FW-EDGE-01`) terminating Transit VLAN 70, performing stateful inspection and NAT Overload via WAN Router (`RTR-EDGE-01`) to the ISP gateway.
+* **Change Governance (CHANGE-001):** Full documentation and execution of change control procedures to resolve physical endpoint cabling discrepancies with immutable before/after audit logs.
 
 ---
 
-## 4. Explicit Out-of-Scope (Planned for Future Versions)
-Để đảm bảo sự tập trung cao nhất vào chất lượng hạ tầng Core Network, các công nghệ sau cố ý dời sang các phiên bản nâng cấp:
+## 4. Explicit Out-of-Scope (Planned for Future Releases)
 
-* **Active Directory / Windows Server Domain (Version 2.0):** Mặc dù có tần suất yêu cầu cao (9 JDs), AD thuộc mảng Quản trị Hệ thống (System Administration). Việc tích hợp AD sẽ thực hiện ở Ver 2.0 sau khi hạ tầng L2/L3 vận hành ổn định.
-* **Remote Access VPN / Site-to-Site VPN (Version 1.5):** Dành cho kết nối từ xa, sẽ tích hợp ở bản cập nhật tiếp theo.
-* **SIEM / Centralized Monitoring (Version 3.0):** Thuộc phạm vi Giám sát An toàn thông tin nâng cao (Security Operations).
+To ensure maximum engineering focus and verification depth on core network plumbing and security baselines, the following capabilities are explicitly deferred:
+* **Active Directory / Windows Server Domain Integration (Version 2.0):** While frequently requested in market JDs, identity management belongs to System Administration and will be integrated after Layer 2/Layer 3 stability is established.
+* **Remote Access & Site-to-Site IPsec VPN (Version 1.5):** Scheduled for perimeter expansion in subsequent iterations.
+* **Centralized SIEM & NetFlow Analytics (Version 3.0):** Advanced Security Operations and telemetry analysis are deferred to enterprise scale-up phases.
+* **First Hop Redundancy Protocols (HSRP / VRRP):** Version 1.0 operates on an Active-Passive L2 Core redundancy model; active-active FHRP is slated for multi-core scaling.
 
 ---
 
 ## 5. Requirement Traceability Matrix
 
-| Quyết định Kỹ thuật (v1.0) | Căn cứ Tuyển dụng (Source: docs/Requirements_Discovery.md) | Diễn giải Kỹ thuật (Interpretation) | Rủi ro Nghiệp vụ Giải quyết |
+| Architectural Feature (v1.0) | Market Evidence (Source: `docs/01_requirements_discovery/`) | Engineering Interpretation & CVD Reference | Business / Technical Risk Mitigated |
 | :--- | :--- | :--- | :--- |
-| **VLAN Segmentation** | CyberLogitec, TechValley (Explicit) + Manpower (Implied) | Quản trị Switch L2 yêu cầu phân vùng mạng | Lộ dữ liệu Kế toán/HR, tràn ngập Broadcast Storm |
-| **DHCP Server** | 6 JDs (Axon, TechValley, Reeracoen...) | Cần thiết cho vận hành cấp phát IP tự động | Xung đột IP tĩnh, tốn công Helpdesk |
-| **Inter-VLAN Routing** | 7 JDs (TechValley, Reeracoen, FedEx...) | Yêu cầu kiểm soát luồng giao tiếp L3 | Mất kết nối liên phòng ban |
-| **Guest Network Isolation** | Firewall 3 JDs + Troubleshooting 8 JDs | An toàn thông tin mạng không dây cho Khách | Ransomware lây lan từ thiết bị ngoài |
-| **Port Security & STP** | Troubleshooting 8 JDs (DXC, Intel...) | An toàn vật lý và ổn định hạ tầng Layer 2 | Sập mạng do Loop hoặc cắm Router chui |
+| **VLAN Segmentation (10–90, 999)** | CyberLogitec, TechValley (Explicit) + Manpower (Implied) | Enterprise Layer-2 isolation required per department | Eliminates broadcast storms and unauthorized cross-department data exposure. |
+| **Centralized L3 SVI Routing** | 7 JDs (TechValley, Reeracoen, FedEx...) | Collapsed core architecture eliminating single-router bottleneck | Prevents throughput degradation caused by legacy Router-on-a-Stick models. |
+| **LACP EtherChannel (Po1..3)** | Cisco CVD + DXC, Intel Troubleshooting JDs | Link aggregation across uplinks for bandwidth and failover | Eliminates single-cable failure downtime between Core and Access switches. |
+| **Rapid-PVST+ Tuning** | Troubleshooting 8 JDs (Cisco Campus Design) | Sub-2-second deterministic convergence on link failure | Prevents Layer-2 loops and prolonged Spanning-Tree recalculation outages. |
+| **Guest Network Isolation (ACL)** | Firewall 3 JDs + Security Baseline Specs | Lateral isolation of untrusted endpoints at Layer 3 | Mitigates malware/ransomware propagation into internal subnets. |
+| **Port Security & BPDU Guard** | Troubleshooting 8 JDs + Cisco SAFE Guidelines | Physical edge hardening against rogue access points/switches | Prevents MAC flooding attacks, rogue DHCP injection, and STP hijacking. |
+| **Evidence Change Control (CHANGE-001)** | Production Governance & Audit Assurance | Formal change ticketing, blast radius control & audit trailing | Prevents configuration drift and undocumented infrastructure state divergence. |
 
 ---
 
-## 6. Dataset Limitations
-* **Recruitment vs. Architecture:** Dữ liệu thu thập từ bài đăng tuyển dụng (JDs tại `research/data/raw_jobs.csv`) phục vụ mục đích tuyển dụng, không phải tài liệu kiến trúc kỹ thuật. Một số công nghệ hạ tầng được ngầm định (Implied) thay vì liệt kê chi tiết.
-* **Sample Scope:** Tập dữ liệu 157 JDs cung cấp góc nhìn thực tế (Snapshot) về yêu cầu tuyển dụng Entry-level tại Việt Nam, đóng vai trò làm căn cứ tham chiếu để xác định phạm vi cho dự án bài lab cá nhân này.
+## 6. Dataset Limitations & Research Validity
+
+* **Recruitment vs. Architecture:** Job postings (`research/raw/raw_jobs.csv`) reflect hiring intent rather than technical architectural blueprints. Certain standard protocols (e.g., LACP, Rapid-PVST+, Dot1Q trunking) are operationally implied rather than explicitly detailed in entry-level postings.
+* **Sampling Context:** The 157 JD dataset provides an empirical snapshot of the Vietnamese IT employment market, serving as an evidence-based foundation to justify technical design priorities for this enterprise implementation.
