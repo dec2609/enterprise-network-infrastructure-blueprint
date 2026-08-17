@@ -1,0 +1,10 @@
+﻿Host_Name,Device_Type,VLAN_ID,Assigned_IP,Subnet_Mask,Assignment_Type,Purpose
+CORE-L3-01-MGMT,L3 Core Switch Primary,70,10.10.70.10,255.255.255.0,Static,In-band SSH/SNMP Management Interface
+CORE-L3-02-MGMT,L3 Core Switch Backup,70,10.10.70.11,255.255.255.0,Static,In-band SSH/SNMP Management Interface
+ACC-F1-01-MGMT,Floor 1 Access Switch,70,10.10.70.21,255.255.255.0,Static,In-band Management Interface
+ACC-F2-01-MGMT,Floor 2 Access Switch,70,10.10.70.22,255.255.255.0,Static,In-band Management Interface
+ACC-F3-01-MGMT,Floor 3 Access Switch,70,10.10.70.23,255.255.255.0,Static,In-band Management Interface
+SRV-GIT-01,Enterprise Server,60,10.10.60.21,255.255.255.0,Static,Git Source Code & CI/CD Repository
+SRV-ERP-01,Enterprise Server,60,10.10.60.22,255.255.255.0,Static,ERP & Financial Database Server
+SRV-DC-01,Enterprise Server,60,10.10.60.23,255.255.255.0,Static,Active Directory Domain Controller & DNS
+FW-EDGE-01-INT,Firewall Interface,70,10.10.70.2,255.255.255.0,Static,Firewall Internal Management Gateway

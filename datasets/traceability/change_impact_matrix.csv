@@ -1,0 +1,3 @@
+﻿Target_Configuration_Change,Directly_Impacted_Modules,Required_Traceability_Updates,Change_Risk_Level
+"Modify Dev Subnet IP Range (e.g., Change VLAN 10 from 10.10.10.0/24 to 10.10.11.0/24)","Core SVI Vlan10, Extended ACL_DEV_IN, Access Switch Management Gateway, DHCP Relay Scope","Update dr3_3_ip_addressing_plan.csv, CORE-L3-01.cfg, ACL_DEV_IN rules, Chapter 4 Ping Test Scripts",HIGH - May break developer server access if ACL is not updated simultaneously
+"Add New Department VLAN (e.g., VLAN 100 Legal Department)","VLAN Database across all switches, Trunk Allowed VLAN Lists, Core SVI Vlan100, Inter-VLAN ACLs","Register in dr3_3_ip_addressing_plan.csv, dr3_4_vlan_mapping.csv, update trunk allowed lists",MEDIUM - Requires trunk update across all 4 switches

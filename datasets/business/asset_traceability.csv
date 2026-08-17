@@ -1,0 +1,5 @@
+﻿Asset_ID,Asset_Group,Primary_Threat,Requirement_Mapping,Design_Control
+AST-01 to AST-05,Department Workstations,Cross-departmental data leakage / Unauthorized lateral movement,REQ-02 (Logical Segmentation),Dedicated Departmental VLANs (VLAN 10-50)
+AST-06 to AST-07,Core/Access Switches,Single Point of Failure (SPOF) & Physical Bottlenecks,REQ-01 (Hierarchical Topology),Collapsed Core 2-Tier Topology with Dual Trunk Uplinks
+AST-08 to AST-10,"PoE Powered Endpoints (APs, Cameras, Phones)",Power Outage / Power Line Overload / Voice Jitter,REQ-03 (Resiliency & PoE),802.3at PoE+ Access Switches & QoS Priority
+AST-13,Guest Devices,"Rogue Attacks, Malware Spread to Corporate Subnets, Rogue DHCP","REQ-02, REQ-04 (Segmentation & Edge Security)",Guest Isolation VLAN 90 + DHCP Snooping & Port Security

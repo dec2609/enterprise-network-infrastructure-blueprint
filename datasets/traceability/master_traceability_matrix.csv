@@ -1,0 +1,9 @@
+﻿Business_Need,System_Requirement_ID,Architecture_Decision_ID,Design_Review_Chapter,CLI_Configuration_Reference,Chapter4_Validation_Plan
+Departmental Functional Isolation,FR-01,DEC-02,DR 3.4,"CORE-L3-01 & ACC-F1..F3: vlan 10,20,30,40,50,60,70,80,90",L2 Broadcast Domain Isolation Test (Ping between endpoints)
+Inter-Department Controlled Communication,FR-01,DEC-03,DR 3.5,CORE-L3-01: interface Vlan10..90 ip address 10.10.x.1,Inter-VLAN SVI Gateway Reachability Ping Test
+ERP & Financial PII Data Protection,"SR-01, SR-02",DEC-07,DR 3.6,CORE-L3-01: ip access-list extended ACL_DEV_IN / ACL_FIN_IN,Cross-Zone ICMP Ping Blocked & TCP Port 1433/22 Scan Test
+Untrusted Visitor Wi-Fi Isolation,SR-03,DEC-07,DR 3.6,CORE-L3-01: ip access-list extended ACL_GUEST_IN (deny RFC1918),Guest Ping to Internal Private Subnets (10.10.10.1) Rejected
+Mitigate Rogue DHCP Infrastructure Attacks,SR-04,DEC-04,DR 3.6,"ACC-F1..F3: ip dhcp snooping, ip dhcp snooping trust (Uplinks)",Rogue DHCP Server Offer Packet Dropped at Access Edge Port
+Prevent L2 Switching Loops & Rogue Switches,"SR-05, SR-06",DEC-04,DR 3.4 / DR 3.6,"ACC-F1..F3: switchport port-security, bpduguard enable",Port Transitions to err-disable Status upon BPDU Detection
+Zero-Downtime Uplink Cable Fault Tolerance,AR-01,DEC-05,DR 3.7,CORE-L3-01 & ACC-F1..F3: interface Port-Channel 1 mode active,Uplink Cable Pull Test; Continuous Ping Failover < 50ms
+Resilient Inline Power for APs & CCTV,AR-03,DEC-06,DR 3.2 / DR 3.7,ACC-F1..F3: 802.3at PoE+ Active Power Delivery with 3KVA UPS,Mains Power Failure Simulation; Wireless APs Stay Online

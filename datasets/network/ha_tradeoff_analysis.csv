@@ -1,0 +1,6 @@
+Option_ID,Architecture_Option,Bandwidth_Capacity,Failover_Convergence,Complexity_Score,Cost_Factor,Packet_Tracer_Support,Decision_Status,Tradeoff_Rationale
+HA-OPT-01,Single Physical Link Trunk (No HA),100Mbps / 1Gbps,No Failover (Single Point of Failure),1/5,Low,100%,REJECTED,Fails AR-01 availability requirements; single cable cut drops entire floor.
+HA-OPT-02,Static Trunking (EtherChannel Mode ON),200Mbps / 2Gbps,Static Failover (<2s),2/5,Medium,100%,REJECTED,Lacks active LCP negotiation; risks silent blackholing if misconfigured.
+HA-OPT-03,LACP Active EtherChannel (802.3ad),200Mbps / 2Gbps,Sub-second Active Failover,3/5,Medium,100%,SELECTED (DEC-003),Fully compliant with AR-01; negotiates link state actively and supported by PT.
+HA-OPT-04,Cisco PAgP EtherChannel (Desirable),200Mbps / 2Gbps,Sub-second Active Failover,3/5,Medium,100%,REJECTED,Proprietary Cisco protocol; violates vendor-neutral architecture standards.
+HA-OPT-05,StackWise / Virtual Switching System (VSS),20Gbps+,Instant Hardware Failover,5/5,Very High,0%,REJECTED,Not supported in Cisco Packet Tracer and exceeds SME budget boundaries.

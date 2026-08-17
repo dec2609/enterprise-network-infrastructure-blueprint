@@ -1,0 +1,5 @@
+﻿Evaluation_Criteria,Router_on_a_Stick_RoAS,Layer_3_SVI_Switching,Selected_Choice
+Routing Throughput & Hardware Performance,Bottlenecked by single sub-interface trunk bandwidth; CPU routed,Wire-speed ASIC switching backplane; Gbps throughput,Layer 3 SVI Switching
+ACL Policy Enforcement Point,CPU-bound packet filtering causing latency under heavy load,Hardware TCAM-based ACL enforcement at wire speed,Layer 3 SVI Switching
+Scalability & Modular Growth,Limited trunk bandwidth as VLANs and user count expand,High-density SVI scalability across core switching fabric,Layer 3 SVI Switching
+SME Operational Suitability,Suitable for small labs or minimal budget scenarios,"Optimal for 150-user, 3-floor Collapsed Core architecture",Layer 3 SVI Switching

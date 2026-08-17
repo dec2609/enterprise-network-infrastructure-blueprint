@@ -1,0 +1,262 @@
+NOTEBOOK EXTRACTION RULES
+Enterprise Network Infrastructure Blueprint
+Purpose: Extract design facts in controlled batches for later Draw.io and Cisco Packet Tracer implementation.
+
+==================================================
+0. CORE PRINCIPLE
+==================================================
+
+This is an EXTRACTION task, not a design task.
+
+The source documents are the authority.
+Do not redesign the network.
+Do not optimize the network.
+Do not add features.
+Do not silently correct contradictions.
+Do not fill missing values with Cisco/general networking knowledge.
+
+The final goal is to produce a source-grounded implementation reference that can later be used to:
+DESIGN DOCUMENTS -> EXTRACTED DATA -> DRAW.IO -> PACKET TRACER -> CONFIGURATION -> VALIDATION
+
+==================================================
+1. SOURCE-OF-TRUTH RULE
+==================================================
+
+Use only information actually present in the supplied source material.
+
+Preserve:
+- Original terminology
+- Original device names
+- Original interface names
+- Original IP addresses
+- Original VLAN IDs/names
+- Original topology relationships
+- Original policy wording
+- Original design intent
+
+Do NOT silently replace source information with outside knowledge.
+
+If a value is absent:
+UNSPECIFIED
+
+If two sources disagree:
+CONFLICT
+
+If a conclusion requires inference:
+INFERENCE
+
+Never convert INFERENCE into a design fact.
+
+==================================================
+2. SOURCE TRACEABILITY
+==================================================
+
+Every important extracted fact should retain its source.
+
+Preferred source notation:
+[Source: filename / section / heading]
+
+If exact location is unavailable, use the most specific source identifier available.
+
+Do not invent citations.
+
+==================================================
+3. BATCH EXECUTION RULE
+==================================================
+
+The extraction is intentionally split into 10 batches.
+
+When asked to execute Batch N:
+- Work ONLY on Batch N's scope.
+- Use ALL source material available in the Notebook as context.
+- Do not repeat the full output of previous batches unless necessary to resolve a conflict.
+- Do not perform future batches.
+- Do not invent missing information merely because a later batch would normally need it.
+- If a fact belongs to another batch but is necessary for understanding the current batch, reference it briefly rather than fully extracting it.
+- Keep the output structured and reusable.
+
+The user will run:
+"Execute Batch 1"
+then
+"Execute Batch 2"
+...
+through
+"Execute Batch 10".
+
+==================================================
+4. COMPLETENESS RULE
+==================================================
+
+Within the requested batch, extract ALL relevant information supported by the sources.
+
+Do not intentionally omit a value because it looks unimportant.
+
+At the same time, do not expand the scope into unrelated information.
+
+Think:
+"complete within scope, restrained outside scope."
+
+==================================================
+5. CONFLICT RULE
+==================================================
+
+If a source says:
+A = X
+
+and another says:
+A = Y
+
+do NOT choose X or Y.
+
+Report:
+
+CONFLICT
+- Source A: X
+- Source B: Y
+- Conflict: X vs Y
+- Resolution: UNRESOLVED
+
+Only report a resolution if the source material itself explicitly resolves it.
+
+==================================================
+6. CONFIG FILE RULE
+==================================================
+
+Existing .cfg files are implementation evidence, not automatically the design authority.
+
+When comparing design documents with configs:
+- Extract what the config actually contains.
+- Extract what the design actually specifies.
+- If they differ, report the discrepancy.
+- Do not modify either one.
+- Do not assume the config is correct simply because it is executable.
+- Do not assume the design is correct simply because it is in a document.
+
+==================================================
+7. DRAW.IO RULE
+==================================================
+
+The eventual Draw.io diagram should represent the design as supported by the extracted facts.
+
+Do not turn Draw.io into a giant CLI/configuration dump.
+
+Useful diagram information may include:
+- Devices
+- Roles
+- Physical/logical links
+- Interfaces
+- Important IP addresses
+- VLANs
+- Subnets
+- Security boundaries
+- Routing boundaries
+- Major HA relationships
+
+Only include a detail if it is source-supported.
+
+==================================================
+8. PACKET TRACER RULE
+==================================================
+
+The extracted data is a reference for later implementation.
+
+Do NOT:
+- invent Packet Tracer workarounds
+- change topology because of presumed simulator limitations
+- create new interfaces
+- change IPs
+- create new VLANs
+- remove features
+- add features
+
+Those decisions belong to the implementation stage, not extraction.
+
+==================================================
+9. OUTPUT FORMAT
+==================================================
+
+For each batch, use:
+
+# BATCH N — [NAME]
+
+## A. EXTRACTED FACTS
+Structured tables/lists containing the source-supported facts.
+
+## B. SOURCE / TRACEABILITY
+Where the facts came from.
+
+## C. CONFLICTS
+Only actual conflicts found in the sources.
+If none:
+NONE FOUND
+
+## D. UNSPECIFIED
+Important fields that the sources do not define.
+If none:
+NONE FOUND
+
+## E. INFERENCES
+Only genuine inferred relationships.
+If none:
+NONE
+
+## F. IMPLEMENTATION REFERENCE
+A concise list of values that will later be useful for Draw.io / Packet Tracer.
+Do not invent anything.
+
+==================================================
+10. NO "HELPFUL" FABRICATION
+==================================================
+
+Never fabricate:
+- IP addresses
+- subnet masks
+- VLAN names
+- VLAN IDs
+- interfaces
+- device models
+- cable types
+- ACL rules
+- security levels
+- routing next-hops
+- STP priorities
+- EtherChannel IDs
+- endpoint assignments
+- firewall behavior
+- configuration commands
+
+If it is not supported:
+UNSPECIFIED
+
+==================================================
+11. NO SILENT NORMALIZATION
+==================================================
+
+Do not silently:
+- rename devices
+- normalize interface names
+- change CIDR notation
+- reinterpret roles
+- merge two devices
+- split one device into two
+- correct spelling into a different identifier
+- convert a policy into a CLI command
+
+Preserve source values exactly, then optionally add a clearly marked normalized representation if useful.
+
+==================================================
+12. FINAL QUALITY CHECK
+==================================================
+
+Before returning a batch, verify:
+
+[ ] Every extracted fact belongs to this batch.
+[ ] Important facts have source references.
+[ ] No unsupported values were invented.
+[ ] Conflicts are explicitly marked.
+[ ] Missing information is explicitly marked.
+[ ] Inferences are separated from facts.
+[ ] Terminology matches the source.
+[ ] The output is usable as structured input for later Draw.io/Packet Tracer work.
+
+END OF RULES

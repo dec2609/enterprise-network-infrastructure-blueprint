@@ -1,0 +1,5 @@
+﻿Requirement_ID,Source_Theme,Requirement_Statement,Associated_Evidences_Count,Vendor_Neutral_Status
+REQ-01,Theme 1: Layered & Modular Architecture,"The infrastructure SHALL adopt a modular, hierarchical topology to enforce physical/logical abstraction, constrain fault domains, and support horizontal scaling.",23,VERIFIED (No vendor-specific terms)
+REQ-02,Theme 3: Security Segmentation & Boundary Defense,"The network SHALL enforce strict logical segmentation and access boundaries between staff subnets, administrative environments, and untrusted guest/IoT access points.",30,VERIFIED (No vendor-specific terms)
+REQ-03,Theme 2: Network Resiliency & High Availability,The local network SHALL maintain continuous availability through link/node redundancy and provide standardized Power over Ethernet (PoE) delivery to connected endpoints.,17,VERIFIED (No vendor-specific terms)
+REQ-04,Theme 4: Access Port Stability & Rogue Mitigation,Edge access ports SHALL implement baseline Layer 2 security controls to suppress Spanning-Tree topology loops and mitigate rogue dynamic addressing services.,6,VERIFIED (No vendor-specific terms)

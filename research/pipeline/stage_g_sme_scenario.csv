@@ -1,0 +1,5 @@
+﻿Scenario_Attribute,Instantiated_Value,Driven_By_Use_Case,Instantiation_Rationale
+Company Name & Industry,ABC Software Solutions (SaaS & Software Engineering),"UC-01 (Workforce Expansion), UC-02 (Multi-role Access)","A software firm naturally requires clear boundaries between software development environments, administrative functions, and guest connectivity."
+Headcount & Device Scale,150 Permanent Staff + 50 Guest/IoT Endpoints,"UC-01 (Scalability), UC-03 (PoE Endpoints)","Provides a representative SME scale to validate IP subnetting, VLAN capacity, and switch port utilization."
+Physical Topology Layout,3-Floor Office Building (Floor 1: HR/Finance/Reception; Floor 2: Dev/QA; Floor 3: Mgmt/DevOps/Server Room),"UC-01 (Zone Expansion), UC-03 (Redundant Uplinks)",Maps physical floor distribution directly to access layer switches connected via trunk links to the core backbone.
+Functional Segmentation,"6 Functional Zones: Dev, QA, HR, Finance, Executive Management, Guest Wi-Fi","UC-02 (Role Isolation), UC-04 (Rogue Mitigation)",Fulfills the requirement for strict logical separation and controlled inter-departmental communication.

@@ -1,0 +1,11 @@
+﻿VLAN_ID,VLAN_Name,Department_Purpose,Subnet_Mapped,Trust_Zone,Operational_Status
+10,DEV,Software Development Workstations,10.10.10.0/24,Dev & QA Zone (Trust Level 3),Active / Access
+20,QA,Quality Assurance Testing Lab,10.10.20.0/24,Dev & QA Zone (Trust Level 3),Active / Access
+30,HR,Human Resources Department,10.10.30.0/25,HR Zone (Trust Level 4),Active / Access
+40,FIN,Finance & Accounting Workstations,10.10.40.0/25,Finance Zone (Trust Level 5),Active / Access
+50,EXEC,Executive Board Laptops,10.10.50.0/25,Management Zone (Trust Level 4),Active / Access
+60,SERVER,Core Application Servers (Git/ERP/DC),10.10.60.0/24,Server Zone (Trust Level 5),Active / Access
+70,MGMT,Infrastructure SSH Out-of-Band,10.10.70.0/24,Infrastructure Zone (Trust Level 5),Active / Access
+80,VOICE,VoIP IP Telephony & Security CCTV,10.10.80.0/24,IoT & Security Zone (Trust Level 2),Active / Access
+90,GUEST,Untrusted Visitor Wi-Fi Network,10.10.90.0/24,Guest Zone (Trust Level 1),Active / Access
+999,NATIVE,Unused Native VLAN Identifier,No IP Assigned,Infrastructure Base,Trunk Native Only

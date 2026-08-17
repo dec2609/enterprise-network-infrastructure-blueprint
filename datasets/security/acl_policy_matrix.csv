@@ -1,0 +1,5 @@
+﻿ACL_Name,Source_Subnet,Permitted_Destinations,Denied_Destinations,Implicit_Action,Enforcement_SVI
+ACL_DEV_IN,VLAN 10 Dev (10.10.10.0/24),"Server Zone (Git SSH/HTTPS 10.10.60.21:22,443), DNS (10.10.60.23:53), Internet","Finance (10.10.40.0/25), HR (10.10.30.0/25), Mgmt (10.10.70.0/24)",Deny All Other Inter-VLAN Traffic,Core SVI Vlan10 Inbound
+ACL_FIN_IN,VLAN 40 Finance (10.10.40.0/25),"Server Zone (ERP Database 10.10.60.22:1433,443), DNS (10.10.60.23:53), Internet","Dev (10.10.10.0/24), QA (10.10.20.0/24), Mgmt (10.10.70.0/24)",Deny All Other Inter-VLAN Traffic,Core SVI Vlan40 Inbound
+ACL_HR_IN,VLAN 30 HR (10.10.30.0/25),"Server Zone (ERP Database 10.10.60.22:443), DNS (10.10.60.23:53), Internet","Finance (10.10.40.0/25), Dev (10.10.10.0/24), Mgmt (10.10.70.0/24)",Deny All Other Inter-VLAN Traffic,Core SVI Vlan30 Inbound
+ACL_GUEST_IN,VLAN 90 Guest (10.10.90.0/24),External Public Internet (0.0.0.0/0),"RFC 1918 Private Address Ranges (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)",Deny All Internal Access,Core SVI Vlan90 Inbound

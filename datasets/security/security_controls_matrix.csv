@@ -1,0 +1,7 @@
+﻿Threat_ID,Threat_Category,Threat_Description,Security_Control,Control_Layer,Enforcement_Point,Mapped_Requirement
+THR-01,Unauthorized Inter-VLAN Access,Malware lateral spread or non-authorized employee accessing Finance/HR servers.,Inter-VLAN Extended Access Control Lists (ACLs),Layer 3 (Network),Core L3 Switch SVI Interfaces (Inbound),"SR-01, SR-02"
+THR-02,Rogue DHCP Server Attack,Unauthorized DHCP server plugged into wall jack issuing fake IPs and Default Gateways.,DHCP Snooping & Trusted/Untrusted Port Boundary,Layer 2 (Data Link),Access Switch Ports (ACC-F1/F2/F3),SR-04
+THR-03,MAC Address Spoofing & Rogue Devices,Attacker connects unauthorized laptop to wall jack mimicking valid corporate MAC address.,"Port Security (Sticky MAC, Limit 2, Restrict/Shutdown)",Layer 2 (Data Link),Access Switch User Edge Ports,"SR-04, SR-06"
+THR-04,Spanning-Tree BPDU Ingestion,Unauthorized switch connected to access port causing STP topology recalculation.,RSTP BPDU Guard & PortFast Enablement,Layer 2 (Data Link),Access Switch User Edge Ports,SR-05
+THR-05,Untrusted Guest Lateral Intrusion,Visitor on Guest Wi-Fi attempting to probe internal RFC1918 enterprise subnets.,Guest Isolation ACL (Explicit Deny RFC 1918 Private Subnets),Layer 3 (Network),Core SVI Vlan90 (Inbound),SR-03
+THR-06,Unauthorized Control Plane Probing,User on Dev/Guest VLAN trying to SSH or SNMP into switch management IPs.,Isolated Management VLAN 70 & Control Plane Filter,Layer 3 / Management Plane,Core SVI Vlan70 (Inbound) / Switch VTY Lines,SR-06

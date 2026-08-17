@@ -1,0 +1,148 @@
+# Enterprise Network Infrastructure Blueprint
+
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Infrastructure: Cisco L2/L3](https://img.shields.io/badge/Infrastructure-Cisco%20Catalyst-orange.svg)
+![Status: Accepted & Frozen](https://img.shields.io/badge/Status-Accepted%20%26%20Frozen-brightgreen.svg)
+![Validation Pass: 94.4%](https://img.shields.io/badge/Validation-94.4%25%20Pass-green.svg)
+![Methodology: Systems Engineering](https://img.shields.io/badge/Methodology-Systems%20Engineering-purple.svg)
+
+A vendor-neutral, production-ready enterprise network architecture blueprint designed, implemented, and validated through a traceable Systems Engineering lifecycle. The system is engineered to solve multi-zone campus connectivity, high-availability convergence, and granular access control for SME enterprise environments.
+
+---
+
+## 🏛️ Executive Architecture Overview
+
+Requirements were derived from a structured qualitative analysis of **157 Vietnamese IT market job descriptions** and reconciled against **Cisco Validated Design (CVD)** principles. The resulting architecture translates market demands into formal system requirements and Architecture Decision Records (ADRs).
+
+### Core Architectural Capabilities
+* **Layer 2 Foundations:** 9 Production VLANs (VLAN 10–90) and Native/Dead VLAN 999; Rapid PVST+ (`rapid-pvst`) deterministic root election; dual-link LACP active aggregation (`Port-channel1..3`); edge hardening via BPDU Guard, PortFast, DHCP Snooping, and Sticky Port Security.
+* **Layer 3 Forwarding:** Centralized Switched Virtual Interface (SVI) routing on Catalyst 3650 (`CORE-L3-01`) eliminating Router-on-a-Stick bottlenecks, paired with a floating default static route (`0.0.0.0/0 via 10.10.70.2`) into the edge firewall transit zone.
+* **Granular Security Controls:** Extended Access Control Lists (`ACL_DEV_IN`, `ACL_FIN_IN`, `ACL_GUEST_IN`) enforcing strict inter-zone traffic segregation and complete lateral isolation for the Guest Zone.
+* **High Availability & Resilience:** Validated sub-2-second STP re-convergence upon core link failure and zero-packet-drop member link failover across LACP bundles.
+
+---
+
+## 🏗️ Architecture Views
+
+The network architecture is captured across 5 distinct engineering perspectives, preserved in native vector format (`.drawio.svg`) for maximum clarity and traceability:
+
+### 1. Logical Architecture *(Hero View)*
+The primary 4-tier hierarchical topology illustrating core routing, distribution, edge security, and access layer segmentation.
+
+![Logical Architecture](./architecture/logical/logical_topology.drawio.svg)
+
+---
+
+### 2. Supporting Architecture Perspectives
+<details>
+<summary><b>🔍 Click to expand: Physical, Routing, Security & HA Views</b></summary>
+<br>
+
+#### 2.1 Physical Rack Layout & Cabling
+Physical equipment allocation, cable labeling, and power redundancy across the 42U Server Room rack.
+
+![Physical Architecture](./architecture/physical/physical_rack_layout.drawio.svg)
+
+---
+
+#### 2.2 Layer 3 Routing & Traffic Flows
+Inter-VLAN packet flow paths between user workstations, centralized infrastructure services (Git Server `10.10.60.21`), and NAT Overload egress to ISP.
+
+![L3 Routing Flow](./architecture/routing/l3_routing_flow.drawio.svg)
+
+---
+
+#### 2.3 Security Boundaries & Policy Enforcement Points
+Trust Zone classification (Trust Levels 1–5) and ingress SVI Extended ACL policy filter boundaries.
+
+![Security Boundary](./architecture/security/acl_security_boundary.drawio.svg)
+
+---
+
+#### 2.4 High Availability & Link Failover
+LACP bundle member link degradation and Spanning-Tree Alternate Blocking-to-Forwarding (`Altn BLK` -> `Root FWD`) failover behavior.
+
+![High Availability](./architecture/high_availability/lacp_etherchannel_topology.drawio.svg)
+
+</details>
+
+---
+
+## 🔬 Systems Engineering Golden Thread
+
+This repository enforces strict bidirectional traceability from initial market evidence down to individual CLI configuration lines:
+
+```text
+  [ Market Evidence ]        157 Market JDs + Cisco CVD Frameworks
+          │
+          ▼
+  [ Requirements ]           Functional (FR), Security (SR), Availability (AR) Specs
+          │
+          ▼
+  [ System Analysis ]        13 IT Asset Valuations & 5 Security Trust Zones
+          │
+          ▼
+  [ Architecture & ADRs ]    Architecture Decision Records (ADR-001 through ADR-005)
+          │
+          ▼
+  [ Network Design ]         Physical Topology, Subnet Allocation & L2/L3 Plans
+          │
+          ▼
+  [ Implementation ]         7 Reconciled CLI Configuration Codebases
+          │
+          ▼
+  [ Chaos Testing ]          12-Phase Failure Injection & Link Disruption Tests
+          │
+          ▼
+  [ Verification ]           Raw CLI Evidence Logs & As-Built Engineering Report
+```
+
+---
+
+## 🧪 Validation & Chaos Testing Summary
+
+The entire infrastructure underwent a rigorous 12-Phase acceptance test cycle within Cisco Packet Tracer. The system achieved a **94.4% overall pass rate**, with all expected architectural behaviors and simulator boundaries documented.
+
+| Testing Domain | Target Phase | Status | Key Engineering Observation |
+| :--- | :--- | :---: | :--- |
+| **Topology, IP Plan & Trunking** | Phase 1–4 | 🟢 **PASS** | 9 VLANs operational; Dot1Q trunking active across Core-Access uplinks. |
+| **EtherChannel & STP Convergence** | Phase 5–8 | 🟢 **PASS** | LACP `Po1..3` status `(SU)`; Rapid PVST+ converged with deterministic root bridge. |
+| **L3 Inter-VLAN & Egress Routing** | Phase 9 | 🟢 **PASS** | Centralized SVI routing verified; 100% ICMP success across subnets and egress. |
+| **Security & Extended ACL Policy** | Phase 10 | 🟡 **LIMITATION** | Policy logic validated (PASS). SVI binding parser issue identified as Packet Tracer simulator bug. |
+| **STP Link-Down Re-convergence** | Phase 11.1 | 🟢 **PASS** | `CORE-L3-02` alternate port `Gi1/0/24` transitioned from `Altn BLK` to `Root FWD` in <2s. |
+| **LACP Single-Link Degradation** | Phase 11.2 | 🟢 **PASS** | Port-channel remained up `Po1(SU)` after `Fa0/23` shut down; zero traffic drop on `Fa0/24(P)`. |
+| **Active Core Gateway Failure** | Phase 11.3 | 🟢 **PASS** | Documented expected Single-Gateway behavior (Active-Passive L2 redundancy model). |
+| **System Auto Re-convergence** | Phase 11.4 | 🟢 **PASS** | Core 1 recovered; Spanning-Tree and SVI Gateways returned to baseline state automatically. |
+
+> Detailed test case definitions and acceptance logs are available in the [Validation Report](./docs/04_validation/validation_report.md) and [Raw Verification Logs](./implementation/verification/).
+
+---
+
+## 📂 Navigation Gateway
+
+Detailed project documentation is structured into 5 formal chapters and supporting engineering datasets:
+
+* 📚 **Chapter 1 — Requirements Discovery:** [`docs/01_requirements_discovery/`](./docs/01_requirements_discovery/)  
+  *(Market JDs quantitative analysis, keyword frequency, qualitative insights, and scope boundary definitions)*
+* 🏛️ **Chapter 2 — System Architecture & Analysis:** [`docs/02_analysis/`](./docs/02_analysis/)  
+  *(Business context, asset classification AST-01..13, trust zones, system requirements, and ADRs)*
+* 📐 **Chapter 3 — Detailed Network Design:** [`docs/03_network_design/`](./docs/03_network_design/)  
+  *(Subnet planning, L2/L3 design specs, extended ACL matrices, HA design, and modular CLI SOPs)*
+* 🧪 **Chapter 4 — Test & Validation Strategy:** [`docs/04_validation/`](./docs/04_validation/)  
+  *(15 Test Cases specifications, 12-phase acceptance report, and simulator constraint analysis)*
+* 💡 **Chapter 5 — Engineering Reflection & Roadmap:** [`docs/05_reflection/`](./docs/05_reflection/)  
+  *(Lessons learned, architectural trade-offs, and 3-stage scale-up roadmap: HSRP/VRRP, NGFW, and EVE-NG)*
+
+---
+
+## 🛠️ Engineering Artifacts & Quick Links
+* **7 Reconciled Production Configs:** [`implementation/configs/`](./implementation/configs/)
+* **Master Packet Tracer Simulation:** [`packettracer/enterprise_network_v1.0.pkt`](./packettracer/enterprise_network_v1.0.pkt)
+* **Raw CLI Verification Evidence:** [`implementation/verification/`](./implementation/verification/)
+* **Automated Audit & Traceability Scripts:** [`validation/`](./validation/)
+* **Formal As-Built Acceptance Report:** [`deliverables/As_Built_Engineering_Report_v1.0.md`](./deliverables/As_Built_Engineering_Report_v1.0.md)
+
+---
+
+## 📜 License
+This project is open-source and distributed under the MIT License. See the [`LICENSE`](./LICENSE) file for complete details.

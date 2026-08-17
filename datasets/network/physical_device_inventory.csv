@@ -1,0 +1,11 @@
+﻿Device_ID,Device_Role,Hardware_Model,Physical_Location,Power_Dependency,Placement_Rationale
+RTR-EDGE-01,Edge WAN Router,Cisco ISR 2911 / 4331 Equivalent,Floor 3 Server Room - Main Rack (U40),Dual AC Power Supply / UPS Connected,Direct termination point for ISP WAN fiber circuit; co-located with security firewall.
+FW-EDGE-01,Enterprise Next-Gen Firewall,ASA 5506-X / FortiGate Equivalent,Floor 3 Server Room - Main Rack (U38),Dual AC Power Supply / UPS Connected,Inline security inspection between Edge Router and Collapsed Core switching fabric.
+CORE-L3-01,Collapsed Core Layer 3 Switch (Primary),Cisco Catalyst 3650-24PS (L3),Floor 3 Server Room - Main Rack (U34),Redundant PSU / UPS Connected,Centralized SVI routing engine and inter-VLAN ACL policy enforcement point for entire building.
+CORE-L3-02,Collapsed Core Layer 3 Switch (Backup/HA),Cisco Catalyst 3650-24PS (L3),Floor 3 Server Room - Main Rack (U32),Redundant PSU / UPS Connected,High-availability redundant peer linked via StackWise/LACP to eliminate core single points of failure.
+ACC-F1-01,Floor 1 Access Switch,Cisco Catalyst 2960-24TT / 24PS (PoE+),Floor 1 MDF Wall Cabinet (U10),PoE+ Capable / Dedicated UPS,"Proximity to Floor 1 endpoints (Reception, HR, Finance); reduces horizontal copper run length below 90m."
+ACC-F2-01,Floor 2 Access Switch,Cisco Catalyst 2960-24TT / 24PS (PoE+),Floor 2 MDF Wall Cabinet (U10),PoE+ Capable / Dedicated UPS,Proximity to Floor 2 high-density developer workstations and QA staging lab.
+ACC-F3-01,Floor 3 Access Switch,Cisco Catalyst 2960-24TT / 24PS (PoE+),Floor 3 Server Room - Secondary Rack (U10),PoE+ Capable / Main UPS,Serves Floor 3 Executive laptops and IT administration workstations.
+AP-F1-01 to 02,Enterprise Wireless Access Points,Cisco Aironet 1830i,Floor 1 Ceiling Center & Lobby,802.3at PoE+ from ACC-F1-01,Optimal Wi-Fi propagation for visitors and Floor 1 staff.
+AP-F2-01 to 02,Enterprise Wireless Access Points,Cisco Aironet 1830i,Floor 2 Open Dev Floor Ceiling,802.3at PoE+ from ACC-F2-01,High-density wireless coverage for engineering laptops and mobile test devices.
+AP-F3-01 to 02,Enterprise Wireless Access Points,Cisco Aironet 1830i,Floor 3 Boardroom & Exec Suite,802.3at PoE+ from ACC-F3-01,Secure executive wireless connectivity and presentation rooms.

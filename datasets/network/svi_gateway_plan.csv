@@ -1,0 +1,10 @@
+﻿Interface_ID,Associated_VLAN,VLAN_Name,Network_Subnet,Core_SVI_Gateway_IP,Subnet_Mask,Admin_Status,Operational_Function
+Vlan10,10,DEV,10.10.10.0/24,10.10.10.1,255.255.255.0,Enabled,L3 Default Gateway for Software Developers
+Vlan20,20,QA,10.10.20.0/24,10.10.20.1,255.255.255.0,Enabled,L3 Default Gateway for QA Testing Lab
+Vlan30,30,HR,10.10.30.0/25,10.10.30.1,255.255.255.128,Enabled,L3 Default Gateway for HR Department
+Vlan40,40,FIN,10.10.40.0/25,10.10.40.1,255.255.255.128,Enabled,L3 Default Gateway for Finance & Payroll
+Vlan50,50,EXEC,10.10.50.0/25,10.10.50.1,255.255.255.128,Enabled,L3 Default Gateway for Executive Management
+Vlan60,60,SERVER,10.10.60.0/24,10.10.60.1,255.255.255.0,Enabled,L3 Default Gateway for Application Servers (Git/ERP/DC)
+Vlan70,70,MGMT,10.10.70.0/24,10.10.70.1,255.255.255.0,Enabled,L3 Gateway for In-band Switch SSH Management
+Vlan80,80,VOICE,10.10.80.0/24,10.10.80.1,255.255.255.0,Enabled,L3 Default Gateway for VoIP Phones & CCTV
+Vlan90,90,GUEST,10.10.90.0/24,10.10.90.1,255.255.255.0,Enabled,L3 Default Gateway for Untrusted Visitor Wi-Fi

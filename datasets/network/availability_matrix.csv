@@ -1,0 +1,4 @@
+﻿Requirement_ID,Availability_Focus,Planned_HA_Technology,Planned_Configuration,Failure_Domain_Impact,Validation_Test_Method
+AR-01,Uplink Link Redundancy & Fault Tolerance,IEEE 802.3ad LACP EtherChannel Dual-Uplinks,interface Port-Channel 1 (channel-group 1 mode active),Single cable cut causes zero-loss failover (<50ms),Disconnect active uplink cable during continuous ping
+AR-02,Core Switching High Availability & Loop Prevention,Rapid PVST+ (RSTP 802.1w) Primary/Secondary Root,"spanning-tree mode rapid-pvst, Core Priority 4096 / 8192",Prevents L2 switching loops and limits failover convergence <2s,Trigger core topology change; verify RSTP convergence time
+AR-03,Inline Endpoint Power Resiliency,IEEE 802.3at PoE+ Managed Switches with UPS Backup,Active 48V PoE power delivery on Access Switches,Power grid outage mitigated by central UPS powering APs & IP Phones,Cut AC mains power; verify UPS backup powers PoE endpoints

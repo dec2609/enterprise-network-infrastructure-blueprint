@@ -1,0 +1,5 @@
+﻿Requirement_ID,Use_Case,Chosen_Architecture_Decision,Justification_Ref
+REQ-01 (Hierarchical Topology),UC-01 (Workforce Expansion),Collapsed Core Architecture (Option 1): Access Switches per floor trunked to a redundant Core L3 Router/Switch pair.,"Stage H Trade-off Analysis (Balanced for 150-user, 3-floor SME scale)."
+REQ-02 (Logical Segmentation),UC-02 (Multi-role Access Boundaries),"Dedicated VLANs per Department (Dev: VLAN 10, QA: VLAN 20, HR: VLAN 30, Finance: VLAN 40, Mgmt: VLAN 50, Guest: VLAN 90).",Stage D Theme 3 & Cisco CVD Page 8 (Logical network separation).
+REQ-03 (Resiliency & PoE),UC-03 (Power & Availability),PoE+ capability on Access Ports; Dual-homed redundant uplinks (EtherChannel) from Access to Core.,Stage D Theme 2 & Cisco CVD Page 22.
+REQ-04 (Access Port Stability),UC-04 (Rogue & Loop Mitigation),"Enable DHCP Snooping, PortFast, and BPDU Guard on all Access edge ports.",Stage D Theme 4 & Cisco CVD Page 25.

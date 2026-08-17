@@ -1,0 +1,49 @@
+Device_Hostname,Interface,VLAN_ID,VLAN_Name,Assigned_Endpoint,Port_Mode,Port_Security,Initial_State
+ACC-F1-01,FastEthernet0/1,10,DEV,Unassigned/Stale-Description,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/2,30,HR,HR-PC-01,Access,Enabled,Connected
+ACC-F1-01,FastEthernet0/3,30,HR,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/4,30,HR,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/5,30,HR,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/6,30,HR,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/7,30,HR,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/8,30,HR,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/9,40,FIN,FIN-PC-01,Access,Enabled,Connected
+ACC-F1-01,FastEthernet0/10,40,FIN,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/11,40,FIN,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/12,40,FIN,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/13,40,FIN,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/14,40,FIN,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/15,40,FIN,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/16,40,FIN,Unassigned,Access,Enabled,Not Connected
+ACC-F1-01,FastEthernet0/17,N/A,Unused,Unassigned,Access,Disabled,Shutdown
+ACC-F1-01,FastEthernet0/18,N/A,Unused,Unassigned,Access,Disabled,Shutdown
+ACC-F1-01,FastEthernet0/19,80,CCTV,CCTV-CAM-01,Access,Disabled,Connected
+ACC-F1-01,FastEthernet0/20,80,CCTV,CCTV-CAM-02,Access,Disabled,Connected
+ACC-F1-01,FastEthernet0/21,90,GUEST,GUEST-PC-01,Access,Disabled,Connected
+ACC-F1-01,FastEthernet0/22,80,VOICE,IP-PHONE-01,Access,Disabled,Connected
+ACC-F1-01,FastEthernet0/23,Trunk,Trunk,Uplink-Po1-CORE-L3-01,Trunk,Disabled,Connected
+ACC-F1-01,FastEthernet0/24,Trunk,Trunk,Uplink-Po1-CORE-L3-01,Trunk,Disabled,Connected
+ACC-F2-01,FastEthernet0/1,10,DEV,DEV-PC-01,Access,Enabled,Connected
+ACC-F2-01,FastEthernet0/2,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/3,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/4,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/5,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/6,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/7,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/8,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/9,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/10,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/11,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/12,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/13,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/14,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/15,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/16,10,DEV,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/17,20,QA,QA-PC-01,Access,Enabled,Connected
+ACC-F2-01,FastEthernet0/18,20,QA,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/19,20,QA,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/20,20,QA,Unassigned,Access,Enabled,Not Connected
+ACC-F2-01,FastEthernet0/21,N/A,Unused,Unassigned,Access,Disabled,Shutdown
+ACC-F2-01,FastEthernet0/22,N/A,Unused,Unassigned,Access,Disabled,Shutdown
+ACC-F2-01,FastEthernet0/23,Trunk,Trunk,Uplink-Po2-CORE-L3-01,Trunk,Disabled,Connected
+ACC-F2-01,FastEthernet0/24,Trunk,Trunk,Uplink-Po2-CORE-L3-01,Trunk,Disabled,Connected

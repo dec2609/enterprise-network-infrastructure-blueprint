@@ -1,0 +1,10 @@
+﻿VLAN_ID,VLAN_Name,Department_Zone,Mapped_Assets,Active_Hosts,Network_Subnet,Subnet_Mask,Default_Gateway_SVI,Usable_Host_Range,DHCP_Dynamic_Pool,DHCP_Enabled
+10,Development,Software Engineering / QA,80 Dev PCs (AST-01),80,10.10.10.0/24,255.255.255.0,10.10.10.1,10.10.10.1 - 10.10.10.254,10.10.10.100 - 10.10.10.254,YES
+20,Quality_Assurance,QA Testing Lab,20 QA PCs (AST-02),20,10.10.20.0/24,255.255.255.0,10.10.20.1,10.10.20.1 - 10.10.20.254,10.10.20.100 - 10.10.20.254,YES
+30,Human_Resources,HR Department,10 HR PCs (AST-03),10,10.10.30.0/25,255.255.255.128,10.10.30.1,10.10.30.1 - 10.10.30.126,10.10.30.51 - 10.10.30.126,YES
+40,Finance,Finance & Accounting,10 Finance PCs (AST-04),10,10.10.40.0/25,255.255.255.128,10.10.40.1,10.10.40.1 - 10.10.40.126,10.10.40.51 - 10.10.40.126,YES
+50,Executive_Mgmt,Executive Leadership,10 Exec Laptops (AST-05),10,10.10.50.0/25,255.255.255.128,10.10.50.1,10.10.50.1 - 10.10.50.126,10.10.50.51 - 10.10.50.126,YES
+60,Server_Zone,Main Server Room (MDF),"Git, ERP, DC, DNS (AST-11, AST-12)",15,10.10.60.0/24,255.255.255.0,10.10.60.1,10.10.60.1 - 10.10.60.254,N/A (All Static),NO
+70,IT_Management,Infrastructure Out-of-Band,"Switches & Routers Mgmt (AST-06, AST-07)",10,10.10.70.0/24,255.255.255.0,10.10.70.1,10.10.70.1 - 10.10.70.254,N/A (All Static),NO
+80,VoIP_and_IoT,Building Services,"20 IP Phones, 16 CCTV (AST-09, AST-10)",36,10.10.80.0/24,255.255.255.0,10.10.80.1,10.10.80.1 - 10.10.80.254,10.10.80.100 - 10.10.80.254,YES
+90,Guest_Zone,Visitor Lobby & Wi-Fi,50 Guest Devices (AST-13),50,10.10.90.0/24,255.255.255.0,10.10.90.1,10.10.90.1 - 10.10.90.254,10.10.90.100 - 10.10.90.254,YES

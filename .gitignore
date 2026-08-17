@@ -1,0 +1,44 @@
+# ==============================================================================
+# EXCLUSION RULES FOR ENTERPRISE NETWORK BLUEPRINT
+# ==============================================================================
+
+# Cisco Packet Tracer & Lab Simulator Temporary / Autosave Files
+*.pkz
+*.pka.tmp
+*.pkt.tmp
+*.lock
+*.bak
+*.pka_autosave
+
+# Python & Jupyter Notebook Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ipynb_checkpoints/
+*.notebook.log
+
+# Data Science / Environment Files
+.env
+.venv
+env/
+venv/
+ENV/
+*.log
+
+# Operating System Metadata
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

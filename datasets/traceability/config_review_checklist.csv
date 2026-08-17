@@ -1,0 +1,7 @@
+﻿Module,Scope,CORE-L3-01,ACC-F1-01,ACC-F2-01,ACC-F3-01,RTR-EDGE-01
+System Initialization,"Hostname, Domain Lookup Disable, Password Encryption",PASS,PASS,PASS,PASS,PASS
+Layer 2 VLAN & Trunking,"VLANs 10-90, Native 999, Allowed List, DTP Disable",PASS,PASS,PASS,PASS,N/A
+Layer 3 SVI Gateways,9 SVI Gateways Enabled (10.10.x.1),PASS,N/A,N/A,N/A,N/A
+High Availability LACP,802.3ad LACP Port-Channel 1 (Active Mode),PASS,PASS,PASS,PASS,N/A
+Edge Port Security,"Port Security Sticky MAC, BPDU Guard, PortFast",N/A,PASS,PASS,PASS,N/A
+Inter-VLAN Extended ACLs,"ACL_DEV_IN, ACL_FIN_IN, ACL_HR_IN, ACL_GUEST_IN",PASS,N/A,N/A,N/A,N/A
