@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="rack-layout-42u" name="42U Physical Rack Layout">
+    <mxGraphModel dx="1400" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rack_main" value="SERVER ROOM RACK A01 (42U STANDARD ENCLOSURE)" style="swimlane;html=1;rounded=0;fillColor=#2b2b2b;strokeColor=#1a1a1a;fontColor=#ffffff;fontStyle=1;startSize=30;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="40" width="580" height="1260" />
+        </mxCell>
+        <mxCell id="u_lbl_42" value="U42" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="80" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_42" value="Fiber Patch Panel 24-Port LC (WAN / Uplinks)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="80" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_41" value="U41" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="108" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_41" value="Horizontal Cable Management (1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="108" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_40" value="U40" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="136" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_40" value="RTR-EDGE-01 (Cisco ISR 4331 WAN Router - 1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="136" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_39" value="U39" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="164" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_39" value="Rack PDU A (Metered 16A 230V - 1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="164" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_38" value="U38" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="192" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_38" value="1U Blanking Panel" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="192" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_37" value="U37" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="220" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_37" value="FW-EDGE-01 (Cisco ASA 5506-X Firewall - 1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="220" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_36" value="U36" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="248" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_36" value="Horizontal Cable Management (1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="248" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_34" value="U34-U33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="304" width="55" height="56" />
+        </mxCell>
+        <mxCell id="dev_34" value="2U Blanking Panel / Thermal Barrier" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="304" width="490" height="56" />
+        </mxCell>
+        <mxCell id="u_lbl_33" value="U33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="332" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_33" value="CORE-L3-01 (Cisco Catalyst 3650-24TD-E Primary Core - 1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="332" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_32" value="U32" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="360" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_32" value="CORE-L3-02 (Cisco Catalyst 3650-24TD-E Standby Core - 1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="360" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_31" value="U31" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="388" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_31" value="Horizontal Cable Management (1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="388" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_29" value="U29-U28" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="444" width="55" height="56" />
+        </mxCell>
+        <mxCell id="dev_29" value="2U Blanking Panel / Thermal Barrier" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="444" width="490" height="56" />
+        </mxCell>
+        <mxCell id="u_lbl_28" value="U28" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="472" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_28" value="Cat6 Patch Panel Floor 1 (24-Port RJ45)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="472" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_27" value="U27" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="500" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_27" value="ACC-F1-01 (Cisco Catalyst 2960-24TT Floor 1 - 1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="500" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_26" value="U26" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="528" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_26" value="Cat6 Patch Panel Floor 2 (24-Port RJ45)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="528" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_25" value="U25" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="556" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_25" value="ACC-F2-01 (Cisco Catalyst 2960-24TT Floor 2 - 1U) [CHANGE-001]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="556" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_24" value="U24" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="584" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_24" value="Cat6 Patch Panel Floor 3 (24-Port RJ45)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="584" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_23" value="U23" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="612" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_23" value="ACC-F3-01 (Cisco Catalyst 2960-24TT Floor 3 - 1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="612" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_22" value="U22" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="640" width="55" height="28" />
+        </mxCell>
+        <mxCell id="dev_22" value="Horizontal Cable Management (1U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="640" width="490" height="28" />
+        </mxCell>
+        <mxCell id="u_lbl_18" value="U18-U15" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="752" width="55" height="112" />
+        </mxCell>
+        <mxCell id="dev_18" value="4U Blanking Airflow Barrier" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="752" width="490" height="112" />
+        </mxCell>
+        <mxCell id="u_lbl_16" value="U16-U15" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="808" width="55" height="56" />
+        </mxCell>
+        <mxCell id="dev_16" value="SRV-01: Git / CI-CD Application Server (2U Rack Server)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="808" width="490" height="56" />
+        </mxCell>
+        <mxCell id="u_lbl_14" value="U14-U13" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="864" width="55" height="56" />
+        </mxCell>
+        <mxCell id="dev_14" value="SRV-02: Production Database Server (2U Rack Server)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="864" width="490" height="56" />
+        </mxCell>
+        <mxCell id="u_lbl_12" value="U12-U11" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="920" width="55" height="56" />
+        </mxCell>
+        <mxCell id="dev_12" value="SRV-03: Local DNS / DHCP Infrastructure Server (2U Rack Server)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="920" width="490" height="56" />
+        </mxCell>
+        <mxCell id="u_lbl_8" value="U8-U5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="1032" width="55" height="112" />
+        </mxCell>
+        <mxCell id="dev_8" value="4U Blanking Space for Future Expansion" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#222222;fontColor=#888888;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="1032" width="490" height="112" />
+        </mxCell>
+        <mxCell id="u_lbl_6" value="U6-U5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="1088" width="55" height="56" />
+        </mxCell>
+        <mxCell id="dev_6" value="Rack PDU B (Redundant Circuit - 2U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="1088" width="490" height="56" />
+        </mxCell>
+        <mxCell id="u_lbl_1" value="U1-U-3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#b0b0b0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="95" y="1228" width="55" height="140" />
+        </mxCell>
+        <mxCell id="dev_1" value="UPS-3000VA Online Double-Conversion Power + Battery Module (5U)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="155" y="1228" width="490" height="140" />
+        </mxCell>
+        <mxCell id="legend_box" value="&lt;b&gt;42U RACK SPECIFICATIONS &amp; THERMAL DESIGN&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Rack Dimension:&lt;/b&gt; 42U 19-inch Standard (600mm W x 1000mm D)&lt;br&gt;• &lt;b&gt;Cooling / Airflow:&lt;/b&gt; Front-to-Back Airflow with Blanking Panels&lt;br&gt;• &lt;b&gt;Power Distribution:&lt;/b&gt; Dual A/B Redundant Feed (2x 16A PDUs)&lt;br&gt;• &lt;b&gt;Battery Backup:&lt;/b&gt; 3000VA Online UPS with 15min Full-load Runtime&lt;br&gt;• &lt;b&gt;Cable Management:&lt;/b&gt; 1U Horizontal D-Ring Organizers between layers&lt;br&gt;&lt;br&gt;&lt;b&gt;COLOR LEGEND:&lt;/b&gt;&lt;br&gt;• &lt;font color='#6c8ebf'&gt;&lt;b&gt;Blue:&lt;/b&gt;&lt;/font&gt; WAN &amp; Perimeter Edge Routing (ISR 4331)&lt;br&gt;• &lt;font color='#b85450'&gt;&lt;b&gt;Red:&lt;/b&gt;&lt;/font&gt; Edge Security Firewall (ASA 5506-X)&lt;br&gt;• &lt;font color='#9673a6'&gt;&lt;b&gt;Purple:&lt;/b&gt;&lt;/font&gt; Core / Distribution Layer (Catalyst 3650)&lt;br&gt;• &lt;font color='#82b366'&gt;&lt;b&gt;Green:&lt;/b&gt;&lt;/font&gt; Access Layer Switches (Catalyst 2960)&lt;br&gt;• &lt;font color='#d6b656'&gt;&lt;b&gt;Yellow:&lt;/b&gt;&lt;/font&gt; High-Value Compute &amp; Server Farm&lt;br&gt;• &lt;font color='#666666'&gt;&lt;b&gt;Gray:&lt;/b&gt;&lt;/font&gt; Power Management &amp; Structured Patch Panels" style="shape=note;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#b0b0b0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="700" y="80" width="620" height="420" />
+        </mxCell>
+        <mxCell id="change_box" value="&lt;b&gt;PHYSICAL AS-BUILT RECONCILIATION (CHANGE-001)&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Floor 2 Patch Panel:&lt;/b&gt; Port 01 physically connected to &lt;code&gt;ACC-F2-01:Fa0/1&lt;/code&gt;.&lt;br&gt;• &lt;b&gt;DEV Workstation:&lt;/b&gt; Re-routed patch lead to Floor 2 Cat6 field termination.&lt;br&gt;• &lt;b&gt;Audit Status:&lt;/b&gt; Physical cabling matches As-Built Switch Port Plan." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#b0b0b0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="700" y="530" width="620" height="140" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

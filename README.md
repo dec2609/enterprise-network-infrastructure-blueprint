@@ -2,11 +2,15 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Infrastructure: Cisco L2/L3](https://img.shields.io/badge/Infrastructure-Cisco%20Catalyst-orange.svg)
-![Status: Accepted & Frozen](https://img.shields.io/badge/Status-Accepted%20%26%20Frozen-brightgreen.svg)
+![Status: Data Consistency Review](https://img.shields.io/badge/Status-Data%20Consistency%20Review-yellow.svg)
 ![Validation Pass: 94.4%](https://img.shields.io/badge/Validation-94.4%25%20Pass-green.svg)
 ![Methodology: Systems Engineering](https://img.shields.io/badge/Methodology-Systems%20Engineering-purple.svg)
+![Audit: Reconciled](https://img.shields.io/badge/Audit-Reconciled-blueviolet.svg)
 
-A vendor-neutral, production-ready enterprise network architecture blueprint designed, implemented, and validated through a traceable Systems Engineering lifecycle. The system is engineered to solve multi-zone campus connectivity, high-availability convergence, and granular access control for SME enterprise environments.
+> **Status:** 🟡 `Final Data Consistency Review in Progress`  
+> Core project content and architecture visualizations are complete. Final work is limited to reconciling implementation and documentation artifacts for consistency before publication.
+
+A vendor-neutral, production-ready enterprise network architecture blueprint designed, implemented, validated, and reconciled through a traceable Systems Engineering lifecycle. The system is engineered to solve multi-zone campus connectivity, high-availability convergence, granular access control, and configuration assurance for SME enterprise environments.
 
 ---
 
@@ -19,6 +23,22 @@ Requirements were derived from a structured qualitative analysis of **157 Vietna
 * **Layer 3 Forwarding:** Centralized Switched Virtual Interface (SVI) routing on Catalyst 3650 (`CORE-L3-01`) eliminating Router-on-a-Stick bottlenecks, paired with a floating default static route (`0.0.0.0/0 via 10.10.70.2`) into the edge firewall transit zone.
 * **Granular Security Controls:** Extended Access Control Lists (`ACL_DEV_IN`, `ACL_FIN_IN`, `ACL_GUEST_IN`) enforcing strict inter-zone traffic segregation and complete lateral isolation for the Guest Zone.
 * **High Availability & Resilience:** Validated sub-2-second STP re-convergence upon core link failure and zero-packet-drop member link failover across LACP bundles.
+
+---
+
+## 🛡️ Change Management & Audit Highlight
+
+### Case Study: CHANGE-001 (Endpoint Physical Re-allocation & Port-Security)
+During post-implementation verification, an endpoint allocation discrepancy was detected: `DEV-PC-01` (VLAN 10) was physically patched to Switch Floor 1 (`ACC-F1-01 / Fa0/1`) instead of Switch Floor 2 (`ACC-F2-01 / Fa0/1`).
+
+```text
+  [ DEVIATION DETECTED ] ──> [ SCOPE CONTROL ] ──> [ CONTROLLED EXECUTION ] ──> [ EVIDENCE RECONCILIATION ]
+  DEV on Floor 1 (VLAN 30)    Frozen Core/Firewall  Relocate cable to Floor 2    100% Ping to Gateway/Git Srv
+  Sticky MAC bound on F1     Limit to F1/F2 Ports  Clear Stale MAC on F1        Update Port Plan & 6 Artifacts
+```
+
+* **Audit Trail & Ticket Record:** [`change-management/CHANGE-001/CHANGE-001-dev-endpoint-reconciliation.md`](./change-management/CHANGE-001/CHANGE-001-dev-endpoint-reconciliation.md)
+* **Pre-Change & Post-Change Evidence:** [`change-management/CHANGE-001/`](./change-management/CHANGE-001/)
 
 ---
 
@@ -91,6 +111,9 @@ This repository enforces strict bidirectional traceability from initial market e
   [ Implementation ]         7 Reconciled CLI Configuration Codebases
           │
           ▼
+  [ Governance & Change ]    CHANGE-001 Remediation & Pre/Post Audit Logs
+          │
+          ▼
   [ Chaos Testing ]          12-Phase Failure Injection & Link Disruption Tests
           │
           ▼
@@ -132,10 +155,13 @@ Detailed project documentation is structured into 5 formal chapters and supporti
   *(15 Test Cases specifications, 12-phase acceptance report, and simulator constraint analysis)*
 * 💡 **Chapter 5 — Engineering Reflection & Roadmap:** [`docs/05_reflection/`](./docs/05_reflection/)  
   *(Lessons learned, architectural trade-offs, and 3-stage scale-up roadmap: HSRP/VRRP, NGFW, and EVE-NG)*
+* 🛡️ **Change Management Records:** [`change-management/`](./change-management/)  
+  *(CHANGE-001 audit record, before/after evidence logs, and blast radius assessments)*
 
 ---
 
 ## 🛠️ Engineering Artifacts & Quick Links
+
 * **7 Reconciled Production Configs:** [`implementation/configs/`](./implementation/configs/)
 * **Master Packet Tracer Simulation:** [`packettracer/enterprise_network_v1.0.pkt`](./packettracer/enterprise_network_v1.0.pkt)
 * **Raw CLI Verification Evidence:** [`implementation/verification/`](./implementation/verification/)
@@ -145,4 +171,5 @@ Detailed project documentation is structured into 5 formal chapters and supporti
 ---
 
 ## 📜 License
+
 This project is open-source and distributed under the MIT License. See the [`LICENSE`](./LICENSE) file for complete details.

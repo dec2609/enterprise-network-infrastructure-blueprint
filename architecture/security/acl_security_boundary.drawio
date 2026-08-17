@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="acl-security-boundary" name="ACL Security Boundary">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" value="TRUST LEVEL 1: UNTRUSTED / GUEST ZONE (VLAN 90)" style="swimlane;html=1;rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;startSize=28;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="60" y="60" width="340" height="220" />
+        </mxCell>
+        <mxCell id="t2" value="TRUST LEVEL 2: CORPORATE USER WORKSTATIONS (VLAN 10-50)" style="swimlane;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;startSize=28;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="60" y="320" width="340" height="420" />
+        </mxCell>
+        <mxCell id="t4" value="TRUST LEVEL 4: CORE ENFORCEMENT &amp; GATEWAY LAYER" style="swimlane;html=1;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;startSize=28;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="460" y="60" width="380" height="680" />
+        </mxCell>
+        <mxCell id="t5" value="TRUST LEVEL 5: HIGH-VALUE SERVER FARM (VLAN 60)" style="swimlane;html=1;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;startSize=28;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="900" y="60" width="380" height="380" />
+        </mxCell>
+        <mxCell id="t3" value="TRUST LEVEL 3: PERIMETER &amp; TRANSIT ZONE (VLAN 70)" style="swimlane;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;startSize=28;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="900" y="480" width="380" height="260" />
+        </mxCell>
+        <mxCell id="guest_host" value="Guest Workstations&lt;br&gt;10.10.90.0/24&lt;br&gt;DHCP Leased" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="90" y="120" width="280" height="120" />
+        </mxCell>
+        <mxCell id="dev_host" value="DEV-PC-01 (VLAN 10)&lt;br&gt;10.10.10.0/24&lt;br&gt;[POST CHANGE-001]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="90" y="380" width="280" height="70" />
+        </mxCell>
+        <mxCell id="fin_host" value="Finance PC (VLAN 40)&lt;br&gt;10.10.40.0/24&lt;br&gt;Accounting Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="90" y="480" width="280" height="70" />
+        </mxCell>
+        <mxCell id="other_host" value="HR / QA / Exec (VLAN 20, 30, 50)&lt;br&gt;10.10.0.0/16 User Subnets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="90" y="580" width="280" height="70" />
+        </mxCell>
+        <mxCell id="pep_guest" value="&lt;b&gt;SVI Vlan90 (Ingress PEP)&lt;/b&gt;&lt;br&gt;Policy: &lt;code&gt;ACL_GUEST_IN&lt;/code&gt;&lt;br&gt;• Permit: DNS / DHCP / Transit&lt;br&gt;• Deny: 10.10.0.0/16 (Corporate)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="480" y="120" width="340" height="90" />
+        </mxCell>
+        <mxCell id="pep_dev" value="&lt;b&gt;SVI Vlan10 (Ingress PEP)&lt;/b&gt;&lt;br&gt;Policy: &lt;code&gt;ACL_DEV_IN&lt;/code&gt;&lt;br&gt;• Permit: Git Srv (.21) Ports 22, 443&lt;br&gt;• Deny: Fin / HR Subnets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="480" y="380" width="340" height="80" />
+        </mxCell>
+        <mxCell id="pep_fin" value="&lt;b&gt;SVI Vlan40 (Ingress PEP)&lt;/b&gt;&lt;br&gt;Policy: &lt;code&gt;ACL_FIN_IN&lt;/code&gt;&lt;br&gt;• Permit: DB Srv (.22) Ports 1433, 443&lt;br&gt;• Deny: Lateral User Access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="480" y="480" width="340" height="80" />
+        </mxCell>
+        <mxCell id="core_routing" value="&lt;b&gt;CORE-L3-01 Routing Engine&lt;/b&gt;&lt;br&gt;Stateful Inspection &amp; SVI Forwarding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="480" y="600" width="340" height="90" />
+        </mxCell>
+        <mxCell id="git_server" value="Git / CI-CD Server (AST-03)&lt;br&gt;10.10.60.21/24&lt;br&gt;Ports: 22 (SSH), 443 (HTTPS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="930" y="120" width="320" height="80" />
+        </mxCell>
+        <mxCell id="db_server" value="Database Server (AST-02)&lt;br&gt;10.10.60.22/24&lt;br&gt;Ports: 1433 (SQL), 443 (HTTPS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="930" y="230" width="320" height="80" />
+        </mxCell>
+        <mxCell id="dns_server" value="DNS / Infrastructure Srv&lt;br&gt;10.10.60.10/24&lt;br&gt;Ports: 53 (DNS), 67 (DHCP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="930" y="340" width="320" height="70" />
+        </mxCell>
+        <mxCell id="fw_transit" value="FW-EDGE-01 (ASA 5506-X)&lt;br&gt;Inside Interface: 10.10.70.2&lt;br&gt;Stateful Firewall Boundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="930" y="550" width="320" height="130" />
+        </mxCell>
+        <mxCell id="c_guest" value="Ingress" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;" edge="1" parent="1" source="guest_host" target="pep_guest">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="c_dev" value="Ingress" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;" edge="1" parent="1" source="dev_host" target="pep_dev">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="c_fin" value="Ingress" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;" edge="1" parent="1" source="fin_host" target="pep_fin">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="p_dev_git" value="Permit: SSH/HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="pep_dev" target="git_server">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="p_fin_db" value="Permit: SQL/HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="pep_fin" target="db_server">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="p_guest_fw" value="Permit Egress to Internet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="pep_guest" target="fw_transit">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b_guest_corp" value="DENY: Lateral Corporate Access" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;" edge="1" parent="1" source="pep_guest" target="other_host">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
