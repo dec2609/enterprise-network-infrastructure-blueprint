@@ -187,7 +187,7 @@ Detailed project documentation is structured into 5 formal chapters and supporti
 * **Master Packet Tracer Simulation:** [`packettracer/enterprise_network_v1.0.pkt`](./packettracer/enterprise_network_v1.0.pkt)
 * **Raw CLI Verification Evidence:** [`implementation/verification/`](./implementation/verification/)
 * **Automated Audit & Traceability Scripts:** [`validation/`](./validation/)
-* **Formal As-Built Acceptance Report:** [`deliverables/As_Built_Engineering_Report_v1.0.md`](./deliverables/As_Built_Engineering_Report_v1.0.md)
+* **Final Engineering Report:** [`deliverables/Enterprise_Network_Infrastructure_Blueprint_v1.0.pdf`](./deliverables/Enterprise_Network_Infrastructure_Blueprint_v1.0.pdf)
 
 ---
 
