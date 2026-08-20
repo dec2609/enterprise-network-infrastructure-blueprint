@@ -1,196 +1,165 @@
 # Enterprise Network Infrastructure Blueprint
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Infrastructure: Cisco L2/L3](https://img.shields.io/badge/Infrastructure-Cisco%20Catalyst-orange.svg)
-![Status: Data Consistency Review](https://img.shields.io/badge/Status-Data%20Consistency%20Review-yellow.svg)
-![Validation Pass: 94.4%](https://img.shields.io/badge/Validation-94.4%25%20Pass-green.svg)
-![Methodology: Systems Engineering](https://img.shields.io/badge/Methodology-Systems%20Engineering-purple.svg)
-![Audit: Reconciled](https://img.shields.io/badge/Audit-Reconciled-blueviolet.svg)
+![Infrastructure: Cisco Catalyst](https://img.shields.io/badge/Infrastructure-Cisco%20Catalyst-orange.svg)
+![Validation: 94.4% Pass](https://img.shields.io/badge/Validation-94.4%25%20Pass-green.svg)
+![Status: In Review](https://img.shields.io/badge/Status-Final%20Review-yellow.svg)
 
-> **Status:** 🟡 `Final Data Consistency Review in Progress`  
-> Core architecture, multi-tier implementation, validation evidence, and engineering documentation are undergoing final cross-document reconciliation before baseline freezing.
+> **Status:** Final cross-document review in progress. Core design, implementation, and test evidence are complete; a few documents are still being reconciled before the v1.0 baseline is frozen.
 
-A vendor-neutral, validated enterprise network architecture blueprint designed, implemented, validated, and reconciled through a traceable Systems Engineering lifecycle. The system is engineered to solve multi-zone campus connectivity, Layer-2 resiliency, granular access control, and configuration assurance for a 150-user, three-floor SME enterprise environment.
+A vendor-neutral enterprise network design for **ABC Digital Solutions**, a fictional 150-user, three-floor SME. The project walks through the full engineering lifecycle — requirements gathering, architecture decisions, Cisco-based configuration, security controls, failure testing, change management, and as-built documentation — with each stage traceable to the one before it.
 
----
-
-## 🏛️ Project & Architecture Overview
-
-This project presents a **validated enterprise network architecture blueprint** for **ABC Digital Solutions**.
-
-The project follows a rigorous Systems Engineering approach from business requirements through architecture decisions, Cisco-based implementation, security controls, failure validation, change management, and As-Built documentation.
-
-The objective is not simply to reproduce a classroom Packet Tracer topology, but to demonstrate a traceable engineering workflow in which infrastructure decisions are linked back to explicit market evidence and validated against defined failure scenarios.
-
-### Core Architectural Capabilities
-
-* **Layer 2 Foundations:** 9 Production VLANs (VLAN 10–90) and Native/Dead VLAN 999; Rapid PVST+ (`rapid-pvst`) deterministic root election; dual-link LACP active aggregation (`Port-channel1..3`); edge hardening via BPDU Guard, PortFast, DHCP Snooping, and Sticky Port Security.
-* **Layer 3 Forwarding:** Centralized Switched Virtual Interface (SVI) routing on Catalyst 3650 (`CORE-L3-01`) eliminating Router-on-a-Stick bottlenecks, paired with a floating default static route (`0.0.0.0/0 via 10.10.70.2`) into the edge firewall transit zone.
-* **Granular Security Controls:** Extended Access Control Lists (`ACL_DEV_IN`, `ACL_FIN_IN`, `ACL_HR_IN`, `ACL_GUEST_IN`) enforcing strict inter-zone traffic segregation and complete lateral isolation for the untrusted Guest Zone.
-* **High Availability & Link Resiliency:** Validated sub-2-second STP re-convergence upon core link disruption and zero-packet-drop member link failover across LACP bundles.
-
-> ### ⚠️ Version 1 Architecture Boundary
-> Version 1 provides **Layer 2 and link-level resilience**, but does not implement active-active Layer 3 gateway redundancy.  
-> `CORE-L3-01` operates as the sole active Layer 3 gateway, while `CORE-L3-02` provides Layer 2 secondary bridging and path redundancy. Failure of `CORE-L3-01` temporarily interrupts inter-VLAN routing.  
-> This is an **explicitly accepted V1 architectural limitation**, with First-Hop Redundancy Protocols (HSRP/VRRP) formally retained as a Version 2 evolution milestone.
+The main goal was not simply to assemble a standard topology, but to practice the technical discipline required in infrastructure design: justifying decisions with requirements, verifying failure scenarios instead of assuming reliability, and documenting change events cleanly.
 
 ---
 
-## 🛡️ Change Management & Audit Highlight
+## 🏛️ Architecture Overview
 
-### Case Study: CHANGE-001 (Endpoint Physical Re-allocation & Port-Security)
+* **Layer 2 Foundations:** 9 production VLANs (VLAN 10–90) plus a dedicated native/dead VLAN (999); Rapid PVST+ (`rapid-pvst`) with deterministic root bridges; dual-link LACP active EtherChannels (`Port-channel1–3`); and access edge hardening (BPDU Guard, PortFast, DHCP Snooping, Sticky Port Security).
+* **Layer 3 Forwarding:** Centralized Switched Virtual Interface (SVI) routing on Catalyst 3650 (`CORE-L3-01`) rather than Router-on-a-Stick, paired with a floating default route (`0.0.0.0/0 via 10.10.70.2`) toward the edge firewall transit segment.
+* **Security Controls:** Extended ACLs (`ACL_DEV_IN`, `ACL_FIN_IN`, `ACL_HR_IN`, `ACL_GUEST_IN`) enforcing inter-zone isolation, with the Guest VLAN fully restricted from accessing internal enterprise segments.
+* **High Availability & Link Resiliency:** Sub-2-second STP re-convergence upon core link failure, and zero-packet-loss failover across LACP bundle member links.
 
-During post-implementation verification, an endpoint allocation discrepancy was detected: `DEV-PC-01` (VLAN 10) was physically patched to Switch Floor 1 (`ACC-F1-01 / Fa0/1`) instead of Switch Floor 2 (`ACC-F2-01 / Fa0/1`).
+### What Version 1 Does Not Do
+`CORE-L3-01` serves as the sole active Layer 3 default gateway. Because first-hop redundancy protocols (HSRP/VRRP) are deferred to Version 2, an outage on `CORE-L3-01` temporarily interrupts inter-VLAN routing until the device recovers. `CORE-L3-02` operates purely as an L2 secondary bridge in this baseline. This constraint is documented as an accepted V1 scope boundary.
+
+---
+
+## 🛡️ Change Management: CHANGE-001
+
+During post-implementation verification, an endpoint allocation error was identified: `DEV-PC-01` (VLAN 10) was physically connected to Switch Floor 1 (`ACC-F1-01 / Fa0/1`) instead of Switch Floor 2 (`ACC-F2-01 / Fa0/1`), with a Sticky MAC violation triggered on Floor 1.
 
 ```text
-  [ DEVIATION DETECTED ] ──> [ SCOPE CONTROL ] ──> [ CONTROLLED EXECUTION ] ──> [ EVIDENCE RECONCILIATION ]
-  DEV on Floor 1 (VLAN 30)    Frozen Core/Firewall  Relocate cable to Floor 2    100% Ping to Gateway/Git Srv
-  Sticky MAC bound on F1     Limit to F1/F2 Ports  Clear Stale MAC on F1        Update Port Plan & As-Built Logs
+Detected: Incorrect VLAN and switch port binding on Floor 1
+   │
+   ├── Scoped impact: Confined strictly to Floor 1 and Floor 2 access interfaces
+   ├── Executed change: Re-patched physical cable to Floor 2, cleared stale Sticky MAC
+   └── Verified: 100% ICMP reachability to gateway and server infrastructure; updated Port Plan
 ```
 
-* **Audit Trail & Ticket Record:** [`change-management/CHANGE-001/CHANGE-001-dev-endpoint-reconciliation.md`](./change-management/CHANGE-001/CHANGE-001-dev-endpoint-reconciliation.md)
-* **Pre-Change & Post-Change Evidence:** [`change-management/CHANGE-001/`](./change-management/CHANGE-001/)
+* **Full Ticket & Audit Trail:** [`change-management/CHANGE-001/CHANGE-001-dev-endpoint-reconciliation.md`](./change-management/CHANGE-001/CHANGE-001-dev-endpoint-reconciliation.md)
+* **Pre/Post-Change Evidence Logs:** [`change-management/CHANGE-001/`](./change-management/CHANGE-001/)
 
 ---
 
-## 🏗️ Architecture Views
+## 🏗️ Architecture Diagrams
 
-The network architecture is captured across 5 distinct engineering perspectives, preserved in native vector format (`.svg` / `.drawio`) for maximum clarity and traceability:
+Visualizations are maintained in native vector format (`.svg` / `.drawio`) for direct inspection and editability:
 
-### 1. Logical Architecture *(Hero View)*
-The primary 4-tier hierarchical topology illustrating core routing, distribution, edge security, and access layer segmentation.
+### 1. Logical Topology *(Primary Overview)*
+The 4-tier hierarchical topology illustrating core routing, distribution, perimeter firewalling, and access-layer segmentation.
 
 ![Logical Architecture](./architecture/logical/logical_topology.svg)
 
 ---
 
-### 2. Supporting Architecture Perspectives
+### 2. Supporting Views
 <details>
 <summary><b>🔍 Click to expand: Physical, Routing, Security & HA Views</b></summary>
 <br>
 
-#### 2.1 Physical Rack Layout & Cabling
-Physical equipment allocation, cable labeling, and power redundancy across the 42U Server Room rack.
-
-![Physical Architecture](./architecture/physical/physical_rack_layout.svg)
+* **2.1 Physical Rack Layout:** Equipment mounting, cable labeling, and power redundancy across the 42U Server Room rack.  
+  ![Physical Architecture](./architecture/physical/physical_rack_layout.svg)
 
 ---
 
-#### 2.2 Layer 3 Routing & Traffic Flows
-Inter-VLAN packet flow paths between user workstations, centralized infrastructure services (DNS/DHCP `10.10.60.10`, Git Server `10.10.60.21`), and NAT Overload egress to ISP.
-
-![L3 Routing Flow](./architecture/routing/l3_routing_flow.svg)
+* **2.2 L3 Routing & Traffic Flow:** Inter-VLAN packet paths between endpoints, core infrastructure services (DNS/DHCP at `10.10.60.10`, Git at `10.10.60.21`), and NAT egress.  
+  ![L3 Routing Flow](./architecture/routing/l3_routing_flow.svg)
 
 ---
 
-#### 2.3 Security Boundaries & Policy Enforcement Points
-Trust Zone classification (Trust Levels 1–5) and ingress SVI Extended ACL policy filter boundaries.
-
-![Security Boundary](./architecture/security/acl_security_boundary.svg)
+* **2.3 Security Boundaries:** Trust-Zone classification (Levels 1–5) and ACL policy enforcement points.  
+  ![Security Boundary](./architecture/security/acl_security_boundary.svg)
 
 ---
 
-#### 2.4 High Availability & Link Failover
-LACP bundle member link degradation and Spanning-Tree Alternate Blocking-to-Forwarding (`Altn BLK` -> `Root FWD`) failover behavior.
-
-![High Availability](./architecture/high_availability/lacp_etherchannel_topology.svg)
+* **2.4 HA & Failover Behavior:** LACP single-link degradation and STP Alternate-to-Forwarding transitions.  
+  ![High Availability](./architecture/high_availability/lacp_etherchannel_topology.svg)
 
 </details>
 
 ---
 
-## 🔬 Systems Engineering Golden Thread
-
-This repository enforces strict bidirectional traceability from initial market evidence down to individual CLI configuration lines:
+## 🔬 Traceability Pipeline
 
 ```text
-  [ Market Evidence ]        157 Market JDs + Cisco CVD Frameworks
-          │
-          ▼
-  [ Requirements ]           Functional (FR), Security (SR), Availability (AR) Specs
-          │
-          ▼
-  [ System Analysis ]        13 IT Asset Valuations & 5 Security Trust Zones
-          │
-          ▼
-  [ Architecture & ADRs ]    Architecture Decision Records (ADR-001 through ADR-005)
-          │
-          ▼
-  [ Network Design ]         Physical Topology, Subnet Allocation & L2/L3 Plans
-          │
-          ▼
-  [ Implementation ]         7 Reconciled Cisco Configuration Baselines
-          │
-          ▼
-  [ Governance & Change ]    CHANGE-001 Remediation & Pre/Post Audit Logs
-          │
-          ▼
-  [ Chaos Testing ]          12-Phase Failure Injection & Link Disruption Tests
-          │
-          ▼
-  [ Verification ]           Raw CLI Evidence Logs & As-Built Engineering Report
+Market Analysis (157 IT job postings + Cisco CVD recommendations)
+        │
+System Requirements (Functional, Security, Availability specifications)
+        │
+Asset & Trust-Zone Classification (13 assets, 5 security zones)
+        │
+Architecture Decisions (ADR-001 through ADR-005)
+        │
+Network Design (VLAN allocation, subnetting, L2/L3 plans)
+        │
+Implementation (7 Cisco device configuration baselines)
+        │
+Change Governance (CHANGE-001 endpoint remediation)
+        │
+Chaos Testing (12-phase failure injection)
+        │
+Verification (CLI logs, as-built documentation)
 ```
 
 ---
 
-## 🧪 Validation & Chaos Testing Summary
+## 🧪 Testing & Validation Summary
 
-The entire infrastructure underwent a rigorous 12-Phase acceptance test cycle within Cisco Packet Tracer. The system achieved a **94.4% overall validation pass rate**, with all expected architectural behaviors and simulator boundaries documented.
+Acceptance testing was conducted in Cisco Packet Tracer across 12 structured phases, achieving a **94.4% overall validation pass rate**.
 
-| Testing Domain | Target Phase | Status | Key Engineering Observation |
+| Test Area | Phase | Result | Key Engineering Observation |
 | :--- | :---: | :---: | :--- |
-| **Topology, IP Plan & Trunking** | Phase 1–4 | 🟢 PASS | 9 VLANs operational; Dot1Q trunking active across Core-Access uplinks. |
-| **EtherChannel & STP Convergence** | Phase 5–8 | 🟢 PASS | LACP Po1..3 status (SU); Rapid PVST+ converged with deterministic root bridge. |
-| **L3 Inter-VLAN & Egress Routing** | Phase 9 | 🟢 PASS | Centralized SVI routing verified; 100% ICMP reachability across internal subnets and egress. |
-| **Security & Extended ACL Policy** | Phase 10 | 🟡 LIMITATION | Policy logic validated (PASS). SVI binding parser issue identified as Packet Tracer simulator bug. |
-| **STP Link-Down Re-convergence** | Phase 11.1 | 🟢 PASS | CORE-L3-02 alternate port Gi1/0/24 transitioned from Altn BLK to Root FWD in <2s. |
-| **LACP Single-Link Degradation** | Phase 11.2 | 🟢 PASS | Port-channel remained up Po1(SU) after Fa0/23 shut down; zero traffic drop on Fa0/24(P). |
-| **Active Core Gateway Failure** | Phase 11.3 | 🟡 PARTIAL | Documented expected Single-Gateway behavior (Active-Passive L2 redundancy model; L3 routing paused). |
-| **System Auto Re-convergence** | Phase 11.4 | 🟢 PASS | Core 1 recovered; Spanning-Tree and SVI Gateways returned to baseline state automatically. |
+| **Topology, IP Plan & Trunking** | 1–4 | 🟢 Pass | 9 VLANs operational; 802.1Q trunks active on all Core-Access links. |
+| **EtherChannel & STP Convergence** | 5–8 | 🟢 Pass | LACP bundles up `Po1..3(SU)`; Rapid PVST+ converged with deterministic root bridge. |
+| **L3 Inter-VLAN & Egress Routing** | 9 | 🟢 Pass | Centralized SVI routing verified; 100% ICMP reachability to internal servers and gateway. |
+| **ACL Policy Enforcement** | 10 | 🟡 Limitation | Policy syntax and logic verified; SVI ACL binding encounters a known Packet Tracer parser constraint. |
+| **STP Link-Down Convergence** | 11.1 | 🟢 Pass | `CORE-L3-02` alternate port `Gi1/0/24` moved from `Altn BLK` to `Root FWD` in <2s. |
+| **LACP Single-Link Degradation** | 11.2 | 🟢 Pass | Port-channel remained up `Po1(SU)` upon link shutdown; zero traffic loss on remaining link. |
+| **Active Gateway Failure** | 11.3 | 🟡 Partial | Expected Single-Gateway behavior (inter-VLAN routing paused; L3 failover deferred to V2). |
+| **System Auto-Recovery** | 11.4 | 🟢 Pass | Core 1 recovered; Spanning-Tree topology and SVI routing returned to baseline automatically. |
 
-> Detailed test case definitions and acceptance logs are available in the [Validation Report](./docs/04_validation/validation_report.md) and [Raw Verification Logs](./implementation/verification/).
+> Full test specifications and raw output captures are available in the [Validation Report](./docs/04_validation/validation_report.md) and [Raw Verification Logs](./implementation/verification/).
 
 ---
 
 ## ⚠️ Known Limitations
 
-The following limitations are explicitly documented as part of the Version 1 engineering baseline:
+Being transparent about what Version 1 does and does not cover:
 
-1. **Layer 3 Gateway Redundancy:** `CORE-L3-01` serves as the sole active Layer 3 default gateway. First-hop routing redundancy via HSRP/VRRP is deferred to Version 2.
-2. **Packet Tracer ACL Binding Behavior:** Extended ACL syntax and policy logic are verified, but Packet Tracer Catalyst 3650 parser exhibits a known limitation preventing `running-config` commitment on SVI ingress.
-3. **Simulation Modeling Boundary:** Test results represent a modeled Cisco Packet Tracer environment and should not be interpreted as physical hardware production certification.
+* **No First-Hop Gateway Redundancy:** `CORE-L3-01` represents a single point of failure for Layer 3 inter-VLAN routing. First-hop redundancy (HSRP/VRRP) is scoped for Version 2.
+* **Packet Tracer SVI ACL Parser Behavior:** Extended ACL syntax and filtering logic are verified correct, but the Catalyst 3650 parser in Packet Tracer exhibits a known limitation preventing running-config commitment on SVI ingress.
+* **Simulation Modeling Boundary:** Testing was performed within Cisco Packet Tracer; validation confirms architectural logic rather than physical hardware performance.
 
 ---
 
-## 📂 Navigation Gateway
+## 📂 Documentation Index
 
-Detailed project documentation is structured into 5 formal chapters and supporting engineering datasets:
-
-* 📚 **Chapter 1 — Requirements Discovery:** [`docs/01_requirements_discovery/`](./docs/01_requirements_discovery/)  
-  *(Market JDs quantitative analysis, keyword frequency, qualitative insights, and scope boundary definitions)*
-* 🏛️ **Chapter 2 — System Architecture & Analysis:** [`docs/02_analysis/`](./docs/02_analysis/)  
-  *(Business context, asset classification AST-01..13, trust zones, system requirements, and ADRs)*
-* 📐 **Chapter 3 — Detailed Network Design:** [`docs/03_network_design/`](./docs/03_network_design/)  
-  *(Subnet planning, L2/L3 design specs, extended ACL matrices, HA design, and modular CLI SOPs)*
-* 🧪 **Chapter 4 — Test & Validation Strategy:** [`docs/04_validation/`](./docs/04_validation/)  
-  *(15 Test Cases specifications, 12-phase acceptance report, and simulator constraint analysis)*
-* 💡 **Chapter 5 — Engineering Reflection & Roadmap:** [`docs/05_reflection/`](./docs/05_reflection/)  
-  *(Lessons learned, architectural trade-offs, and 3-stage scale-up roadmap: HSRP/VRRP, NGFW, and EVE-NG)*
+* 📚 **Ch. 1 — Requirements Discovery:** [`docs/01_requirements_discovery/`](./docs/01_requirements_discovery/)  
+  *(Market analysis, keyword distributions, and project scope boundaries)*
+* 🏛️ **Ch. 2 — System Architecture & Analysis:** [`docs/02_analysis/`](./docs/02_analysis/)  
+  *(Business context, asset valuations AST-01..13, trust zones, system requirements, and ADRs)*
+* 📐 **Ch. 3 — Detailed Network Design:** [`docs/03_network_design/`](./docs/03_network_design/)  
+  *(Subnetting plan, L2/L3 design specs, extended ACL matrices, and switch CLI SOPs)*
+* 🧪 **Ch. 4 — Test & Validation Strategy:** [`docs/04_validation/`](./docs/04_validation/)  
+  *(15 test cases, 12-phase acceptance report, and failure scenario logs)*
+* 💡 **Ch. 5 — Engineering Reflection & Roadmap:** [`docs/05_reflection/`](./docs/05_reflection/)  
+  *(Lessons learned, architectural trade-offs, and V2 roadmap including HSRP/VRRP, NGFW, and EVE-NG)*
 * 🛡️ **Change Management Records:** [`change-management/`](./change-management/)  
-  *(CHANGE-001 audit record, before/after evidence logs, and blast radius assessments)*
+  *(CHANGE-001 incident handling, blast radius assessment, and As-Built updates)*
 
 ---
 
-## 🛠️ Engineering Artifacts & Quick Links
+## 🛠️ Repository Artifacts
 
-* **7 Reconciled Cisco Configuration Baselines:** [`implementation/configs/`](./implementation/configs/)
-* **Master Packet Tracer Simulation:** [`packettracer/enterprise_network_v1.0.pkt`](./packettracer/enterprise_network_v1.0.pkt)
-* **Raw CLI Verification Evidence:** [`implementation/verification/`](./implementation/verification/)
-* **Automated Audit & Traceability Scripts:** [`validation/`](./validation/)
-* **Final Engineering Report:** [`deliverables/Enterprise_Network_Infrastructure_Blueprint_v1.0.pdf`](./deliverables/Enterprise_Network_Infrastructure_Blueprint_v1.0.pdf)
+* **Cisco Configuration Baselines:** [`implementation/configs/`](./implementation/configs/) *(7 reconciled device configs)*
+* **Packet Tracer Network File:** [`packettracer/enterprise_network_v1.0.pkt`](./packettracer/enterprise_network_v1.0.pkt)
+* **Raw CLI Verification Logs:** [`implementation/verification/`](./implementation/verification/)
+* **Audit & Traceability Scripts:** [`validation/`](./validation/)
+* **Final Engineering Report:** [`deliverables/As_Built_Engineering_Report_v1.0.md`](./deliverables/As_Built_Engineering_Report_v1.0.md)
 
 ---
 
 ## 📜 License
 
-This project is open-source and distributed under the MIT License. See the [`LICENSE`](./LICENSE) file for complete details.
+This project is licensed under the MIT License. See the [`LICENSE`](./LICENSE) file for details.
